@@ -1,0 +1,1 @@
+#define DEBUGMSG(M1) if (DEBUG) then {systemChat (M1)}
