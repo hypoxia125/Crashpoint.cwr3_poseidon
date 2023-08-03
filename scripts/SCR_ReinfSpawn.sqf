@@ -11,6 +11,8 @@ waitUntil {
     time >= (60 * _tillReinf)
 };
 
+missionNamespace setVariable ["us_reinf", true, true];
+
 [HQ, "Reinforcments ETA 30 Seconds!"] remoteExec ["sideChat", [0,-2] select isDedicated];
 
 private _deadPlayers = allDead select {isPlayer _x};
@@ -22,7 +24,7 @@ private _heli = createVehicle [_heliClass, _posStart, [], 0, "FLY"];
 _heli setDir (getDir _heli + (_heli getRelDir (getPosATL heliCrash)));
 
 // create crew
-private _group = createGroup [west, true];
+private _group = createGroup [PLAYER_SIDE, true];
 // driver
 private _unit = _group createUnit [_pilotClass, [0,0,0], [], 0, "NONE"];
 _unit moveInDriver _heli;
@@ -80,7 +82,7 @@ _wp setWaypointType "MOVE";
 _wp setWaypointCompletionRadius 25;
 
 // create respawn
-private _respawn = [west, _heli, "Reinforcement Respawn"] call BIS_fnc_addRespawnPosition;
+private _respawn = [PLAYER_SIDE, _heli, "Reinforcement Respawn"] call BIS_fnc_addRespawnPosition;
 missionNamespace setVariable ["reinf_respawn", _respawn];
 
 DEBUGMSG("Respawn Created - Heli");

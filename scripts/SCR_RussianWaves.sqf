@@ -32,7 +32,7 @@ while {true} do {
     _heli setDir (getDir _heli + (_heli getRelDir (getPosATL heliCrash)));
 
     // create crew
-    private _group = createGroup [east, true];
+    private _group = createGroup [ENEMY_SIDE, true];
     // driver
     private _unit = _group createUnit [_pilotClass, [0,0,0], [], 0, "NONE"];
     _unit moveInDriver _heli;
@@ -91,7 +91,7 @@ while {true} do {
     ];
 
     // create enemy units
-    private _group = createGroup [east, true];
+    private _group = createGroup [ENEMY_SIDE, true];
     _enemyUnits apply {
         private _unit = _group createUnit [_x, [0,0,0], [], 0, "NONE"];
         private _loadout = LoadoutHash get _x;
