@@ -14,10 +14,10 @@ if !(isServer) exitWith {};
     true
 ] call BIS_fnc_taskCreate;
 
-waitUntil {
-    sleep 1;
-    missionNamespace getVariable ["us_reinf", false];
-};
+[missionNamespace, "US_Reinf", {
+    ["defend", "SUCCEEDED"] call BIS_fnc_taskSetState;
+    [missionNamespace, "TaskCompleted", ["defend"], false] call BIS_fnc_callScriptedEventHandler;
+    DEBUGMSG("TaskCompleted Event Handler Called");
 
-["defend", "SUCCEEDED"] call BIS_fnc_taskSetState;
-[missionNamespace, ]
+    [missionNamespace, "US_Reinf", _thisScriptedEventHandler] call BIS_fnc_removeScriptedEventHandler;
+}] call BIS_fnc_addScriptedEventHandler;

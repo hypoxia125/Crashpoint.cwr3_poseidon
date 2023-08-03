@@ -15,14 +15,13 @@ private _enemyUnits = [
     "cwr3_o_soldier_mg"
 ];
 
-O_Current_Reinf = [];
-private _tillReinf = 0;
-private _waveTimer = 5;
+private _tillReinf = 60 * 5;
+private _waveTimer = 60 * 5;
 
 waitUntil {
     sleep 1;
 
-    time >= (60 * _tillReinf)
+    time >= _tillReinf
 };
 
 while {true} do {
@@ -97,8 +96,6 @@ while {true} do {
         private _loadout = LoadoutHash get _x;
         _unit setUnitLoadout _loadout;
         _unit moveInCargo _heli;
-
-        O_Current_Reinf pushBackUnique _unit;
     };
 
     // wp
@@ -108,8 +105,10 @@ while {true} do {
     waitUntil {
         sleep 1;
 
-        time >= (60 * _waveTimer)
-        ||
-        O_Current_Reinf findIf {alive _x} == -1
+        time >= _waveTimer
+    };
+    
+    if (_waveTimer >= 60) then {
+        _waveTimer = _waveTimer - 30;
     };
 };

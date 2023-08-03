@@ -3,15 +3,15 @@
 private _heliClass = "cwr3_b_uh60";
 private _pilotClass = "cwr3_b_soldier_pilot";
 private _crewClass = "cwr3_b_soldier_pilot";
-private _tillReinf = 1; // min
+private _tillReinf = 60 * 1; // min
 
 waitUntil {
     sleep 1;
 
-    time >= (60 * _tillReinf)
+    time >= _tillReinf
 };
 
-missionNamespace setVariable ["us_reinf", true, true];
+[missionNamespace, "US_Reinf", [], false] call BIS_fnc_callScriptedEventHandler;
 
 [HQ, "Reinforcments ETA 30 Seconds!"] remoteExec ["sideChat", [0,-2] select isDedicated];
 
