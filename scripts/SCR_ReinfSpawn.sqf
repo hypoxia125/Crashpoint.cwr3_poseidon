@@ -3,7 +3,7 @@
 private _heliClass = "cwr3_b_uh60";
 private _pilotClass = "cwr3_b_soldier_pilot";
 private _crewClass = "cwr3_b_soldier_pilot";
-private _tillReinf = 60 * 1; // min
+private _tillReinf = 60 * 15;
 
 waitUntil {
     sleep 1;
@@ -12,6 +12,7 @@ waitUntil {
 };
 
 [missionNamespace, "US_Reinf", [], false] call BIS_fnc_callScriptedEventHandler;
+DEBUGMSG("US_Reinf Event Handler Called");
 
 [HQ, "Reinforcments ETA 30 Seconds!"] remoteExec ["sideChat", [0,-2] select isDedicated];
 
@@ -52,7 +53,9 @@ _wp setWaypointStatements [
 
         _players findIf {!(_x in _veh)} == -1;
     },
-    "true"
+    toString {
+        if (isServer) then {execVM "tasks\destroy.sqf"};
+    }
 ];
 
 // smokes around wp1

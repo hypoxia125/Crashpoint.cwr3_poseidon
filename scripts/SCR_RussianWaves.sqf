@@ -102,11 +102,7 @@ while {true} do {
     private _wp = _group addWaypoint [getPosATL HeliCrash, 10];
     _wp setWaypointType "SAD";
 
-    waitUntil {
-        sleep 1;
-
-        time >= _waveTimer
-    };
+    sleep _waveTimer;
     
     if (_waveTimer >= 60) then {
         _waveTimer = _waveTimer - 30;

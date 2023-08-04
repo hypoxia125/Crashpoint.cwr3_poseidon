@@ -4,7 +4,7 @@ if !(isServer) exitWith {};
 
 [
     PLAYER_SIDE,
-    ["critical", "survive"],
+    ["survive", "critical"],
     "survive",
     objNull,
     "CREATED",

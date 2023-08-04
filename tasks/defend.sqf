@@ -8,7 +8,7 @@ if !(isServer) exitWith {};
     "defend",
     HeliCrash,
     "ASSIGNED",
-    1
+    1,
     true,
     "defend",
     true

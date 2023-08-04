@@ -7,7 +7,7 @@
 #define MISSION_NAME "My Mission Name"
 #define MISSION_DESCRIPTION "My Mission Description"
 #define AUTHOR "Hypoxic"
-#define MISSION_IMG ""
+#define MISSION_IMG "data\img\missionIMG.jpg"
 
 /*--------------------------------------------------------------------------------------------------
 	MISSION INFO
@@ -18,14 +18,12 @@ onLoadName = MISSION_NAME;
 onLoadMission = MISSION_DESCRIPTION;
 loadScreen = MISSION_IMG;
 
-/*
 class Header
 {
 	gameType = Coop;
 	minPlayers = 1;
-	maxPlayers = 12;
+	maxPlayers = 10;
 };
-*/
 
 onLoadIntro = MISSION_DESCRIPTION;
 briefingName = MISSION_NAME;
@@ -42,7 +40,7 @@ respawnDelay = 5;
 //respawnVehicleDelay = 12;
 respawnDialog = FALSE;
 respawnOnStart = 0;
-respawnTemplates[] = { "Wave", "MenuPosition" };
+respawnTemplates[] = { "Wave", "MenuPosition", "Spectator" };
 
 /*--------------------------------------------------------------------------------------------------
 	Configs
@@ -50,11 +48,12 @@ respawnTemplates[] = { "Wave", "MenuPosition" };
 #include "config\CfgDebriefing.hpp"
 #include "config\CfgFunctions.hpp"
 #include "config\CfgSounds.hpp"
+#include "config\CfgTaskDescriptions.hpp"
 
 /*--------------------------------------------------------------------------------------------------
 	OTHER SETTINGS
 --------------------------------------------------------------------------------------------------*/
 
 allowProfileGlasses = FALSE;
-disabledAI = TRUE;
+disabledAI = FALSE;
 enableDebugConsole = 1;  // 0 - Only Editor | 1 - SP/Hosts/Admins | 2 - Everyone
