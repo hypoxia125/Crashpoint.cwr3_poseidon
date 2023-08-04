@@ -13,3 +13,5 @@ params ["_player", "_didJIP"];
 	"BIS_respSpecShowHeader",			// Top bar of the spectator UI including mission time
 	"BIS_respSpecLists"					// Show list of available units and locations on the left hand side
 ];
+
+execVM "scripts\SCR_Diary.sqf";
