@@ -1,8 +1,10 @@
-// Briefing
-execVM "tasks\primary.sqf";
-execVM "tasks\critical.sqf";
-execVM "tasks\defend.sqf";
-execVM "tasks\survive.sqf";
+if (isServer) then {
+    // Briefing
+    execVM "tasks\primary.sqf";
+    execVM "tasks\critical.sqf";
+    execVM "tasks\defend.sqf";
+    execVM "tasks\survive.sqf";
+};
 
 waitUntil {
 	!isNil { missionNamespace getVariable "MPSync_EndTime" }

@@ -12,18 +12,22 @@ class EditorData
 	};
 	class ItemIDProvider
 	{
-		nextID=77;
+		nextID=85;
 	};
 	class MarkerIDProvider
 	{
 		nextID=4;
 	};
+	class LayerIndexProvider
+	{
+		nextID=1;
+	};
 	class Camera
 	{
-		pos[]={2816.6675,60.562611,1261.2875};
-		dir[]={0.87001401,-0.4869259,-0.077379137};
-		up[]={0.48501235,0.87344098,-0.043137442};
-		aside[]={-0.088591188,1.308108e-007,-0.99607229};
+		pos[]={2873.1924,36.589413,1256.6184};
+		dir[]={0.1140517,-0.56045604,0.82029402};
+		up[]={0.077182017,0.82818377,0.55511665};
+		aside[]={0.99047256,-8.6438376e-009,-0.13771296};
 	};
 };
 binarizationWanted=0;
@@ -44,13 +48,14 @@ addons[]=
 	"A3_Ui_F",
 	"A3_Modules_F_Intel",
 	"A3_Modules_F_Effects",
-	"mpsync"
+	"mpsync",
+	"cwr3_crates"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=13;
+		items=14;
 		class Item0
 		{
 			className="A3_Data_F";
@@ -134,6 +139,13 @@ class AddonsMetaData
 			className="MPSync";
 			name="MPSync";
 			author="Hypoxic";
+		};
+		class Item13
+		{
+			className="cwr3_crates";
+			name="cwr3_crates";
+			author="CWR III Modification";
+			url="http://cwr3.arma2.fr";
 		};
 	};
 };
@@ -12328,7 +12340,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=15;
+		items=16;
 		class Item0
 		{
 			dataType="Object";
@@ -12750,7 +12762,7 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={2869.6277,29.373882,1264.051};
+						position[]={2869.5059,29.378529,1263.4369};
 						angles[]={0,2.1522954,0};
 					};
 					side="West";
@@ -13302,12 +13314,121 @@ class Mission
 						class data
 						{
 							singleType="SCALAR";
-							value=30;
+							value=3;
 						};
 					};
 				};
 				nAttributes=2;
 			};
+		};
+		class Item15
+		{
+			dataType="Layer";
+			name="Crates";
+			class Entities
+			{
+				items=4;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={2871.3652,30.547453,1265.4069};
+						angles[]={6.2783856,3.979857,6.2208595};
+					};
+					side="Empty";
+					flags=4;
+					class Attributes
+					{
+					};
+					id=77;
+					type="cwr3_crate_basicweapons_us";
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property="ammoBox";
+							expression="[_this,_value] call bis_fnc_initAmmoBox;";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="[[[[""CUP_arifle_M16A1E1"",""CUP_arifle_M16A1E1GL"",""cwr3_arifle_xm177e2"",""CUP_srifle_M14"",""CUP_hgun_M9""],[10,4,4,1,4]],[[""CUP_30Rnd_556x45_Stanag"",""CUP_30Rnd_556x45_G36"",""CUP_30Rnd_556x45_AUG"",""CUP_20Rnd_762x51_DMR"",""CUP_30Rnd_9x19_MP5"",""CUP_15Rnd_9x19_M9"",""CUP_1Rnd_HE_M203"",""CUP_FlareWhite_M203"",""CUP_FlareGreen_M203"",""CUP_FlareRed_M203"",""CUP_1Rnd_Smoke_M203"",""CUP_1Rnd_SmokeRed_M203"",""CUP_1Rnd_SmokeGreen_M203""],[400,400,400,100,50,40,50,2,2,2,2,2,2]],[[""Binocular""],[4]],[[],[]]],false]";
+								};
+							};
+						};
+						nAttributes=1;
+					};
+				};
+				class Item1
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={2872.8618,29.52791,1266.814};
+						angles[]={6.214489,1.9415042,0.0015882496};
+					};
+					side="Empty";
+					flags=4;
+					class Attributes
+					{
+					};
+					id=79;
+					type="cwr3_crate_grenades_us";
+				};
+				class Item2
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={2863.4392,31.054382,1267.9792};
+						angles[]={6.278389,3.979857,6.2208672};
+					};
+					side="Empty";
+					flags=4;
+					class Attributes
+					{
+					};
+					id=82;
+					type="cwr3_crate_basicweapons_us";
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property="ammoBox";
+							expression="[_this,_value] call bis_fnc_initAmmoBox;";
+							class Value
+							{
+								class data
+								{
+									singleType="STRING";
+									value="[[[[""CUP_arifle_M16A1E1"",""CUP_arifle_M16A1E1GL"",""cwr3_arifle_xm177e2"",""CUP_srifle_M14"",""CUP_hgun_M9""],[10,4,4,1,4]],[[""CUP_30Rnd_556x45_Stanag"",""CUP_30Rnd_556x45_G36"",""CUP_30Rnd_556x45_AUG"",""CUP_20Rnd_762x51_DMR"",""CUP_30Rnd_9x19_MP5"",""CUP_15Rnd_9x19_M9"",""CUP_1Rnd_HE_M203"",""CUP_FlareWhite_M203"",""CUP_FlareGreen_M203"",""CUP_FlareRed_M203"",""CUP_1Rnd_Smoke_M203"",""CUP_1Rnd_SmokeRed_M203"",""CUP_1Rnd_SmokeGreen_M203""],[400,400,400,100,50,40,50,2,2,2,2,2,2]],[[""Binocular""],[4]],[[],[]]],false]";
+								};
+							};
+						};
+						nAttributes=1;
+					};
+				};
+				class Item3
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={2867.012,29.881933,1272.0957};
+						angles[]={6.2144942,5.7434006,0.0015822123};
+					};
+					side="Empty";
+					flags=4;
+					class Attributes
+					{
+					};
+					id=83;
+					type="cwr3_crate_grenades_us";
+				};
+			};
+			id=84;
+			atlOffset=0.069419861;
 		};
 	};
 };
