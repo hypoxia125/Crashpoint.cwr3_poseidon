@@ -80,4 +80,13 @@ if (isServer) then {
             _crate addItemCargoGlobal [_item, _count];
         };
     };
+
+    // Hide mission markers
+    private _markers = getMissionLayerEntities "Hide Layer" select 1;
+    _markers apply {_x setMarkerAlpha 0};
+
+    // Cross out heli marker
+    private _marker = createMarkerLocal ["marker_heli_x", getMarkerPos "marker_heli"];
+    _marker setMarkerType "Contact_pencilTask1";
+    _marker setMarkerColorLocal "ColorRed";
 };

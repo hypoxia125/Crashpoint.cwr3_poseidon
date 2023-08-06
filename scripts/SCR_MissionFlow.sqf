@@ -3,10 +3,12 @@ if (isServer) then {
     execVM "tasks\primary.sqf";
     execVM "tasks\critical.sqf";
     execVM "tasks\defend.sqf";
+    execVM "tasks\fortify.sqf";
     execVM "tasks\survive.sqf";
 };
 
 waitUntil {
+    if !(isMultiplayer) exitWith {true};
 	!isNil { missionNamespace getVariable "MPSync_EndTime" }
 };
 

@@ -3,7 +3,7 @@
 private _heliClass = "cwr3_b_uh60";
 private _pilotClass = "cwr3_b_soldier_pilot";
 private _crewClass = "cwr3_b_soldier_pilot";
-private _tillReinf = 60 * 15;
+private _tillReinf = 60 * 20;
 
 waitUntil {
     sleep 1;
@@ -30,6 +30,7 @@ private _group = createGroup [PLAYER_SIDE, true];
 private _unit = _group createUnit [_pilotClass, [0,0,0], [], 0, "NONE"];
 _unit moveInDriver _heli;
 _unit setCombatBehaviour "CARELESS";
+_unit setCaptive true;
 // gunners
 for "_i" from 0 to (count allTurrets _heli - 1) do {
     private _unit = _group createUnit [_crewClass, [0,0,0], [], 0, "NONE"];
@@ -53,9 +54,7 @@ _wp setWaypointStatements [
 
         _players findIf {!(_x in _veh)} == -1;
     },
-    toString {
-        if (isServer) then {execVM "tasks\destroy.sqf"};
-    }
+    "true"
 ];
 
 // smokes around wp1

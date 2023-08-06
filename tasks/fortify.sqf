@@ -4,19 +4,19 @@ if !(isServer) exitWith {};
 
 [
     PLAYER_SIDE,
-    ["defend", "primary"],
-    "defend",
+    ["fortify", "primary"],
+    "fortify",
     HeliCrash,
-    "ASSIGNED",
-    1,
+    "CREATED",
+    -1,
     true,
-    "defend",
+    "repair",
     false
 ] call BIS_fnc_taskCreate;
 
 [missionNamespace, "US_Reinf", {
-    ["defend", "SUCCEEDED"] call BIS_fnc_taskSetState;
-    [missionNamespace, "TaskCompleted", ["defend"], false] call BIS_fnc_callScriptedEventHandler;
+    ["fortify", "SUCCEEDED", false] call BIS_fnc_taskSetState;
+    [missionNamespace, "TaskCompleted", ["fortify"], false] call BIS_fnc_callScriptedEventHandler;
     DEBUGMSG("TaskCompleted Event Handler Called");
 
     [missionNamespace, "US_Reinf", _thisScriptedEventHandler] call BIS_fnc_removeScriptedEventHandler;

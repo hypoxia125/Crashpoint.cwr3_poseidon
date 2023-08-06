@@ -15,8 +15,8 @@ private _enemyUnits = [
     "cwr3_o_soldier_mg"
 ];
 
-private _tillReinf = 60 * 5;
-private _waveTimer = 60 * 5;
+private _tillReinf = 60 * 0.1;
+private _waveTimerInitial = 60 * 5;
 
 waitUntil {
     sleep 1;
@@ -24,9 +24,14 @@ waitUntil {
     time >= _tillReinf
 };
 
+private _waveTimer = _waveTimerInitial;
 while {true} do {
+    private _msg = format ["Next Wave In %1 Seconds", _waveTimer];
+    DEBUGMSG(_msg);
+
     // create heli
-    private _posStart = getMarkerPos "ru_spawn_reinf_1" vectorAdd [0,0,100];
+    private _marker = format ["ru_spawn_reinf_%1", ceil random 2];
+    private _posStart = getMarkerPos _marker vectorAdd [0,0,100];
     private _heli = createVehicle [_heliClass, _posStart, [], 0, "FLY"];
     _heli setDir (getDir _heli + (_heli getRelDir (getPosATL heliCrash)));
 
@@ -36,6 +41,7 @@ while {true} do {
     private _unit = _group createUnit [_pilotClass, [0,0,0], [], 0, "NONE"];
     _unit moveInDriver _heli;
     _unit setCombatBehaviour "CARELESS";
+    _unit setCaptive true;
     // gunners
     for "_i" from 0 to (count allTurrets _heli - 1) do {
         private _unit = _group createUnit [_crewClass, [0,0,0], [], 0, "NONE"];
@@ -102,9 +108,8 @@ while {true} do {
     private _wp = _group addWaypoint [getPosATL HeliCrash, 10];
     _wp setWaypointType "SAD";
 
-    sleep _waveTimer;
-    
-    if (_waveTimer >= 60) then {
-        _waveTimer = _waveTimer - 30;
-    };
+    sleep (_waveTimer max 60);
+
+    // change difficulty
+    _waveTimer = (_waveTimer - (_waveTimerInitial * 0.2) max 60);
 };
