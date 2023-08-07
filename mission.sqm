@@ -12,22 +12,22 @@ class EditorData
 	};
 	class ItemIDProvider
 	{
-		nextID=105;
+		nextID=108;
 	};
 	class MarkerIDProvider
 	{
-		nextID=16;
+		nextID=17;
 	};
 	class LayerIndexProvider
 	{
-		nextID=9;
+		nextID=11;
 	};
 	class Camera
 	{
-		pos[]={2797.5381,71.595192,1229.4481};
-		dir[]={0.78133738,-0.3943429,0.48374119};
-		up[]={0.33528525,0.91896343,0.20758164};
-		aside[]={0.52639884,1.4901161e-008,-0.85023785};
+		pos[]={2927.8958,88.071175,1320.8516};
+		dir[]={-0.75798577,-0.32643226,-0.56471193};
+		up[]={-0.26177064,0.94522059,-0.19502346};
+		aside[]={-0.59743929,0,0.8019141};
 	};
 };
 binarizationWanted=0;
@@ -12377,7 +12377,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=19;
+		items=22;
 		class Item0
 		{
 			dataType="Object";
@@ -13528,7 +13528,7 @@ class Mission
 					name="us_spawn_reinf_1";
 					type="mil_dot";
 					id=101;
-					atlOffset=23.027706;
+					atlOffset=23.027637;
 				};
 			};
 			id=85;
@@ -13636,16 +13636,17 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={218.61885,0,183.66241};
-				angles[]={0,5.6521077,0};
+				position[]={218.619,6.8664551e-005,183.662};
+				angles[]={0,5.6521091,0};
 			};
 			side="Empty";
 			class Attributes
 			{
+				name="US_Carrier";
 			};
 			id=100;
 			type="CUP_Type072_Main";
-			atlOffset=20.59693;
+			atlOffset=20.596998;
 		};
 		class Item18
 		{
@@ -13662,6 +13663,82 @@ class Mission
 			};
 			id=103;
 			type="cwr3_b_m2hb_high";
+		};
+		class Item19
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={2866.5225,29.563906,1263.5212};
+				angles[]={6.278389,3.294023,6.2208672};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+			};
+			id=105;
+			type="ACE_medicalSupplyCrate_advanced";
+			atlOffset=1.9073486e-006;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="ammoBox";
+					expression="[_this,_value] call bis_fnc_initAmmoBox;";
+					class Value
+					{
+						class data
+						{
+							singleType="STRING";
+							value="[[[[],[]],[[],[]],[[""ACE_fieldDressing"",""ACE_packingBandage"",""ACE_elasticBandage"",""ACE_tourniquet"",""ACE_splint"",""ACE_morphine"",""ACE_adenosine"",""ACE_epinephrine"",""ACE_plasmaIV"",""ACE_plasmaIV_500"",""ACE_plasmaIV_250"",""ACE_salineIV"",""ACE_salineIV_500"",""ACE_salineIV_250"",""ACE_quikclot"",""ACE_personalAidKit"",""ACE_surgicalKit"",""ACE_bodyBag""],[25,25,25,15,15,15,15,15,7,7,7,7,7,7,20,3,2,5]],[[],[]]],false]";
+						};
+					};
+				};
+				nAttributes=1;
+			};
+		};
+		class Item20
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={2863.217,29.779625,1265.4928};
+				angles[]={6.278389,4.5788612,6.2208672};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+			};
+			id=106;
+			type="ACE_medicalSupplyCrate_advanced";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="ammoBox";
+					expression="[_this,_value] call bis_fnc_initAmmoBox;";
+					class Value
+					{
+						class data
+						{
+							singleType="STRING";
+							value="[[[[],[]],[[],[]],[[""ACE_fieldDressing"",""ACE_packingBandage"",""ACE_elasticBandage"",""ACE_tourniquet"",""ACE_splint"",""ACE_morphine"",""ACE_adenosine"",""ACE_epinephrine"",""ACE_plasmaIV"",""ACE_plasmaIV_500"",""ACE_plasmaIV_250"",""ACE_salineIV"",""ACE_salineIV_500"",""ACE_salineIV_250"",""ACE_quikclot"",""ACE_personalAidKit"",""ACE_surgicalKit"",""ACE_bodyBag""],[25,25,25,15,15,15,15,15,7,7,7,7,7,7,20,3,2,5]],[[],[]]],false]";
+						};
+					};
+				};
+				nAttributes=1;
+			};
+		};
+		class Item21
+		{
+			dataType="Marker";
+			position[]={218.619,-0.026901938,183.662};
+			name="marker_16";
+			type="flag_USA";
+			id=107;
+			atlOffset=20.570028;
 		};
 	};
 };

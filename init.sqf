@@ -39,7 +39,6 @@ LoadoutHash = createHashMapFromArray [
             ["CUP_HandGrenade_M67", 5],
             ["SmokeShell", 5],
             ["ClaymoreDirectionalMine_Remote_Mag", 5],
-            ["CUP_PipeBomb_M", 1],
             ["cwr3_glaunch_mm1", 1],
             ["cwr3_12rnd_mm1_m", 2]
         ]

@@ -13,10 +13,12 @@ waitUntil {
     sleep 1;
 
     time >= USRF_TimeUntilRF
+    ||
+    DEBUG
 };
 
 [missionNamespace, "US_Reinf", [], false] call BIS_fnc_callScriptedEventHandler;
-DEBUGMSG("US_Reinf Event Handler Called");
+LOG_SYS("US_Reinf Event Handler Called");
 
 [HQ, "Reinforcments ETA 30 Seconds!"] remoteExec ["sideChat", [0,-2] select isDedicated];
 
@@ -27,6 +29,49 @@ private _deadPlayers = allDead select {isPlayer _x};
 private _posStart = getMarkerPos "us_spawn_reinf_1" vectorAdd [0,0,100];
 private _heli = createVehicle [_heliClass, _posStart, [], 0, "FLY"];
 _heli setDir (getDir _heli + (_heli getRelDir (getPosATL heliCrash)));
+_heli allowDamage false;
+
+// heli loadout
+_heli spawn {
+    params ["_heli"];
+
+    clearItemCargoGlobal _heli;
+    clearWeaponCargoGlobal _heli;
+    clearBackpackCargoGlobal _heli;
+    clearMagazineCargoGlobal _heli;
+
+    private _items = [
+        ["ACE_fieldDressing", 25],
+        ["ACE_packingBandage", 25],
+        ["ACE_elasticBandage", 25],
+        ["ACE_tourniquet", 15],
+        ["ACE_splint", 15],
+        ["ACE_morphine", 15],
+        ["ACE_adenosine", 15],
+        ["ACE_epinephrine", 15],
+        ["ACE_plasmaIV", 7],
+        ["ACE_plasmaIV_500", 7],
+        ["ACE_plasmaIV_250", 7],
+        ["ACE_salineIV", 7],
+        ["ACE_salineIV_500", 7],
+        ["ACE_salineIV_250", 7],
+        ["ACE_quikclot", 20],
+        ["ACE_personalAidKit", 3],
+        ["ACE_surgicalKit", 2],
+        ["ACE_bodyBag", 5],
+        ["CUP_PipeBomb_M", 5]
+    ];
+    _items insert [-1, loadoutHash get "cwr3_crate_basicweapons_us"];
+    _items insert [-1, loadoutHash get "cwr3_crate_basicweapons_us"];
+    _items insert [-1, loadoutHash get "cwr3_crate_grenades_us"];
+    _items insert [-1, loadoutHash get "cwr3_crate_grenades_us"];
+
+    _items apply {
+        _x params ["_item", "_count"];
+        _heli addItemCargoGlobal [_item, _count];
+    };
+};
+US_Heli = _heli;
 
 // create crew
 private _group = createGroup [PLAYER_SIDE, true];
@@ -43,22 +88,33 @@ for "_i" from 0 to (count allTurrets _heli - 1) do {
     _heli lockTurret [[_i], true];
 };
 
-DEBUGMSG("Heli and Crew Created");
+LOG_SYS("Heli and Crew Created");
+
+//task
+execVM "tasks\exfil.sqf";
 
 // set wps
 private _pos = getMarkerPos "us_wp_reinf_1_1"; _pos set [2, 0];
 private _helipad = createVehicle ["Land_HelipadEmpty_F", _pos, [], 0, "NONE"];
 // wp 1
 private _wp = _group addWaypoint [_helipad, -1];
-_wp setWaypointType "TR UNLOAD";
+//_wp setWaypointType "TR UNLOAD";
+_wp setWaypointType "SCRIPTED";
+_wp setWaypointScript "A3\functions_f\waypoints\fn_wpLand.sqf";
 _wp setWaypointStatements [
     toString {
         private _veh = vehicle this;
         private _players = [false] call HYP_fnc_getPlayers;
 
-        _players findIf {!(_x in _veh)} == -1;
+        ["destroy"] call BIS_fnc_taskCompleted
+        &&
+        {_players findIf {!(_x in _veh)} == -1}
     },
-    "true"
+    toString {
+        if (isServer) then {
+            [missionNamespace, "Exfiltration", [], false] call BIS_fnc_callScriptedEventHandler;
+        };
+    }
 ];
 
 // smokes around wp1
@@ -71,7 +127,7 @@ _wp setWaypointStatements [
         getPosATL _heli select 2 <= 20
     };
 
-    DEBUGMSG("Heli Landing - Smokes: Smokes Created");
+    LOG_SYS("Heli Landing - Smokes: Smokes Created");
 
     for "_i" from 0 to (360 - 30) step 30 do {
         private _smokePos = getPosATL _helipad getPos [20, _i];
@@ -85,10 +141,10 @@ _wp setWaypointStatements [
 private _pos = _posStart;
 private _wp = _group addWaypoint [_pos, -1];
 _wp setWaypointType "MOVE";
-_wp setWaypointCompletionRadius 25;
+_wp setWaypointCompletionRadius 0;
 
 // create respawn
 private _respawn = [PLAYER_SIDE, _heli, "Reinforcement Respawn"] call BIS_fnc_addRespawnPosition;
 missionNamespace setVariable ["reinf_respawn", _respawn];
 
-DEBUGMSG("Respawn Created - Heli");
+LOG_SYS("Respawn Created - Heli");

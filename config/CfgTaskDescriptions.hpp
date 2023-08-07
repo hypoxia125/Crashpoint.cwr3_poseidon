@@ -29,7 +29,7 @@ class CfgTaskDescriptions
     class destroy
     {
         title = "Destroy Heli";
-        description = "To prevent any technologies from entering Russian hands, destroy what is left over of the helicopter.";
+        description = "To prevent any technologies from entering Russian hands, destroy what is left over of the helicopter. Satchel charges are in the reinforcement helicopter.";
     };
     class survive
     {
@@ -40,5 +40,10 @@ class CfgTaskDescriptions
     {
         title = "Fortify Your Position";
         description = "We are going to have to defend this location. We could use some sand bag walls or other defensive fortifications.<br/><br/>Use the fortify tool (Self ACE Interaction w/ Fortify Tool in Inventory) to build fortifications."
+    };
+    class exfil
+    {
+        title = "Exfiltrate";
+        description = "Everyone, get to the chopper! Lets get out of here!";
     };
 };

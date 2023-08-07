@@ -14,7 +14,7 @@ if !(isServer) exitWith {};
     false
 ] call BIS_fnc_taskCreate;
 
-PrimaryObjectives = ["defend", "destroy", "fortify"];
+PrimaryObjectives = ["defend", "destroy", "fortify", "exfil"];
 
 [missionNamespace, "TaskCompleted", {
     params ["_task"];
@@ -23,7 +23,7 @@ PrimaryObjectives = ["defend", "destroy", "fortify"];
     private _subsCompleted = _subTasks findIf {!(_x call BIS_fnc_taskCompleted)} == -1;
 
     if (_subsCompleted) then {
-        ["primary", "SUCCEEDED"] call BIS_fnc_taskSetState;
+        ["primary", "SUCCEEDED", false] call BIS_fnc_taskSetState;
         [missionNamespace, "TaskCompleted", _thisScriptedEventHandler] call BIS_fnc_removeScriptedEventHandler;
     };
 }] call BIS_fnc_addScriptedEventHandler;

@@ -4,8 +4,8 @@
 #define TRUE 1
 #define FALSE 0
 
-#define MISSION_NAME "My Mission Name"
-#define MISSION_DESCRIPTION "My Mission Description"
+#define MISSION_NAME "Crashpoint"
+#define MISSION_DESCRIPTION "Urgent reports reveal a US helicopter has lost power and crash-landed in Russia. The crew survived, but is in need of rescue."
 #define AUTHOR "Hypoxic"
 #define MISSION_IMG "data\img\missionIMG.jpg"
 

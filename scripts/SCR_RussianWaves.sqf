@@ -26,12 +26,13 @@ waitUntil {
     sleep 1;
 
     time >= RURF_TimeUntilRF
+    ||
+    DEBUG
 };
 
 private _waveTimer = RURF_InitialTime;
 while {true} do {
-    private _msg = format ["Next Wave In %1 Seconds", _waveTimer];
-    DEBUGMSG(_msg);
+    LOG_SYS_1("Next Wave In %1 Seconds",_waveTimer);
 
     // create heli
     private _marker = format ["ru_spawn_reinf_%1", ceil random 2];
@@ -54,7 +55,7 @@ while {true} do {
         _heli lockTurret [[_i], true];
     };
 
-    DEBUGMSG("Heli and Crew Created");
+    LOG_SYS("Heli and Crew Created");
 
     // set wps
     private _marker = format ["ru_wp_reinf_1_%1", ceil random 6];
@@ -74,7 +75,7 @@ while {true} do {
             getPosATL _heli select 2 <= 20
         };
 
-        DEBUGMSG("Heli Landing - Smokes: Smokes Created");
+        LOG_SYS("Heli Landing - Smokes: Smokes Created");
 
         for "_i" from 0 to (360 - 30) step 30 do {
             private _smokePos = getPosATL _helipad getPos [20, _i];

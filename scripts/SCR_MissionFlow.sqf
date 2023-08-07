@@ -1,3 +1,5 @@
+#include "macros.hpp"
+
 if (isServer) then {
     // Briefing
     execVM "tasks\primary.sqf";
@@ -41,9 +43,15 @@ if (isServer) then {
     execVM "scripts\SCR_ReinfSpawn.sqf";
     execVM "scripts\SCR_RussianWaves.sqf";
 
-    [missionNamespace, "US_Reinf", {
+    EH_US_Reinf_Destroy = [missionNamespace, "US_Reinf", {
         execVM "tasks\destroy.sqf";
 
-        [missionNamespace, "US_Reinf", _thisScriptedEventHandler] call BIS_fnc_removeScriptedEventHandler;
+        LOG_SYS("DESTROY Task Created");
+
+        [missionNamespace, "US_Reinf", EH_US_Reinf_Destroy] call BIS_fnc_removeScriptedEventHandler;
+
+        LOG_SYS_1("Removing Scripted Handler | US_Reinf | ID: %1",EH_US_Reinf_Destroy);
     }] call BIS_fnc_addScriptedEventHandler;
+
+    LOG_SYS("DESTROY SUBSCRIPTION ID: %1",EH_US_Reinf_Destroy);
 };

@@ -8,7 +8,7 @@ if !(isServer) exitWith {};
     "destroy",
     HeliCrash,
     "ASSIGNED",
-    1,
+    8,
     true,
     "destroy",
     true
@@ -17,23 +17,23 @@ if !(isServer) exitWith {};
 [missionNamespace, "HeliDestroyed", {
     ["destroy", "SUCCEEDED"] call BIS_fnc_taskSetState;
     [missionNamespace, "TaskCompleted", ["destroy"], false] call BIS_fnc_callScriptedEventHandler;
-    DEBUGMSG("TaskCompleted Event Handler Called");
+    LOG_SYS("TaskCompleted Event Handler Called");
 
     [missionNamespace, "HeliDestroyed", _thisScriptedEventHandler] call BIS_fnc_removeScriptedEventHandler;
-}];
+}] call BIS_fnc_addScriptedEventHandler;
 
 [] spawn {
     waitUntil {
         private _explosives = nearestObjects [HeliCrash, ["CUP_PipeBomb_Ammo"], 10, true];
         count _explosives > 0
     };
-    DEBUGMSG("Explosive placed by player");
+    LOG_SYS("Explosive placed by player");
 
     waitUntil {
         private _explosives = nearestObjects [HeliCrash, ["CUP_PipeBomb_Ammo"], 10, true];
         _explosives findIf {!alive _x} != -1;
     };
-    DEBUGMSG("Explosive detonated by player");
+    LOG_SYS("Explosive detonated by player");
 
     for "_i" from 1 to 10 do {
         private _pos = HeliCrash getPos [10 * sqrt random 1, random 360];
