@@ -12,7 +12,7 @@ class EditorData
 	};
 	class ItemIDProvider
 	{
-		nextID=102;
+		nextID=105;
 	};
 	class MarkerIDProvider
 	{
@@ -20,14 +20,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=3;
+		nextID=9;
 	};
 	class Camera
 	{
-		pos[]={2843.1365,200.72432,1001.625};
-		dir[]={0.24732441,-0.38488606,0.88924116};
-		up[]={0.10313302,0.92296255,0.37081042};
-		aside[]={0.96345425,-4.2051397e-008,-0.26796547};
+		pos[]={2797.5381,71.595192,1229.4481};
+		dir[]={0.78133738,-0.3943429,0.48374119};
+		up[]={0.33528525,0.91896343,0.20758164};
+		aside[]={0.52639884,1.4901161e-008,-0.85023785};
 	};
 };
 binarizationWanted=0;
@@ -40,10 +40,11 @@ addons[]=
 	"CUP_Weapons_M16",
 	"CUP_Weapons_Ammunition",
 	"A3_Weapons_F",
-	"A3_Weapons_F_Items",
-	"ace_medical_engine",
 	"ace_medical_treatment",
+	"ace_field_rations",
+	"ace_hearing",
 	"ace_fortify",
+	"ace_realisticnames",
 	"CUP_Weapons_Grenades",
 	"A3_Modules_F_Intel",
 	"A3_Modules_F_Effects",
@@ -51,13 +52,14 @@ addons[]=
 	"cwr3_crates",
 	"A3_Ui_F",
 	"A3_Ui_F_Enoch",
-	"CUP_WaterVehicles_Type072"
+	"CUP_WaterVehicles_Type072",
+	"cwr3_static_weapons"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=16;
+		items=19;
 		class Item0
 		{
 			className="A3_Data_F";
@@ -98,68 +100,89 @@ class AddonsMetaData
 		};
 		class Item6
 		{
-			className="ace_medical_engine";
-			name="ACE3 - Medical Engine";
-			author="ACE-Team";
-			url="https://ace3.acemod.org/";
-		};
-		class Item7
-		{
 			className="ace_medical_treatment";
 			name="ACE3 - Medical Treatment";
 			author="ACE-Team";
 			url="https://ace3.acemod.org/";
 		};
+		class Item7
+		{
+			className="ace_field_rations";
+			name="ACE3 - Field Rations";
+			author="ACE-Team";
+			url="https://ace3.acemod.org/";
+		};
 		class Item8
+		{
+			className="ace_hearing";
+			name="ACE3 - Hearing";
+			author="ACE-Team";
+			url="https://ace3.acemod.org/";
+		};
+		class Item9
 		{
 			className="ace_fortify";
 			name="ace_fortify";
 			author="ACE-Team";
 			url="https://ace3.acemod.org/";
 		};
-		class Item9
+		class Item10
+		{
+			className="A3_Characters_F";
+			name="Arma 3 Alpha - Characters and Clothing";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item11
 		{
 			className="CUP_Weapons_Grenades";
 			name="CUP_Weapons_Grenades";
 		};
-		class Item10
+		class Item12
 		{
 			className="A3_Modules_F";
 			name="Arma 3 Alpha - Scripted Modules";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item11
+		class Item13
 		{
 			className="MPSync";
 			name="MPSync";
 			author="Hypoxic";
 		};
-		class Item12
+		class Item14
 		{
 			className="cwr3_crates";
 			name="cwr3_crates";
 			author="CWR III Modification";
 			url="http://cwr3.arma2.fr";
 		};
-		class Item13
+		class Item15
 		{
 			className="A3_Ui_F";
 			name="Arma 3 - User Interface";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item14
+		class Item16
 		{
 			className="A3_Ui_F_Enoch";
 			name="Arma 3 Enoch - User Interface";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item15
+		class Item17
 		{
 			className="CUP_WaterVehicles_Type072";
 			name="CUP_WaterVehicles_Type072";
+		};
+		class Item18
+		{
+			className="cwr3_static_weapons";
+			name="cwr3_static_weapons";
+			author="CWR III Modification";
+			url="http://cwr3.arma2.fr";
 		};
 	};
 };
@@ -12354,7 +12377,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=18;
+		items=19;
 		class Item0
 		{
 			dataType="Object";
@@ -12446,28 +12469,68 @@ class Mission
 							{
 								typeName="cwr3_b_uniform_m81_woodland";
 								isBackpack=0;
-								class MagazineCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="CUP_30Rnd_556x45_Stanag";
-										count=3;
-										ammoLeft=30;
-									};
-								};
 								class ItemCargo
 								{
-									items=2;
+									items=12;
 									class Item0
 									{
-										name="FirstAidKit";
-										count=1;
+										name="ACE_fieldDressing";
+										count=3;
 									};
 									class Item1
 									{
+										name="ACE_elasticBandage";
+										count=3;
+									};
+									class Item2
+									{
+										name="ACE_packingBandage";
+										count=3;
+									};
+									class Item3
+									{
+										name="ACE_quikclot";
+										count=3;
+									};
+									class Item4
+									{
+										name="ACE_Canteen";
+										count=1;
+									};
+									class Item5
+									{
+										name="ACE_EarPlugs";
+										count=1;
+									};
+									class Item6
+									{
+										name="ACE_epinephrine";
+										count=1;
+									};
+									class Item7
+									{
 										name="ACE_Fortify";
 										count=1;
+									};
+									class Item8
+									{
+										name="ACE_Humanitarian_Ration";
+										count=1;
+									};
+									class Item9
+									{
+										name="ACE_morphine";
+										count=1;
+									};
+									class Item10
+									{
+										name="ACE_splint";
+										count=1;
+									};
+									class Item11
+									{
+										name="ACE_tourniquet";
+										count=2;
 									};
 								};
 							};
@@ -12477,18 +12540,24 @@ class Mission
 								isBackpack=0;
 								class MagazineCargo
 								{
-									items=2;
+									items=3;
 									class Item0
 									{
-										name="CUP_30Rnd_556x45_Stanag";
-										count=4;
-										ammoLeft=30;
+										name="SmokeShell";
+										count=2;
+										ammoLeft=1;
 									};
 									class Item1
 									{
 										name="CUP_HandGrenade_M67";
-										count=4;
+										count=2;
 										ammoLeft=1;
+									};
+									class Item2
+									{
+										name="CUP_30Rnd_556x45_Stanag";
+										count=5;
+										ammoLeft=30;
 									};
 								};
 							};
@@ -13463,7 +13532,7 @@ class Mission
 				};
 			};
 			id=85;
-			atlOffset=7.9164963;
+			atlOffset=11.929745;
 		};
 		class Item8
 		{
@@ -13568,7 +13637,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={218.61885,0,183.66241};
-				angles[]={0,5.6521077,-0};
+				angles[]={0,5.6521077,0};
 			};
 			side="Empty";
 			class Attributes
@@ -13577,6 +13646,22 @@ class Mission
 			id=100;
 			type="CUP_Type072_Main";
 			atlOffset=20.59693;
+		};
+		class Item18
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={2874.7546,30.422428,1267.384};
+				angles[]={6.2144942,1.5106424,0.0015822123};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+			};
+			id=103;
+			type="cwr3_b_m2hb_high";
 		};
 	};
 };

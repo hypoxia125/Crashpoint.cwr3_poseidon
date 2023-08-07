@@ -15,3 +15,10 @@ params ["_player", "_didJIP"];
 ];
 
 execVM "scripts\SCR_Diary.sqf";
+
+//Fortify Tool Hint
+[] spawn {
+    waitUntil {alive player};
+
+    [["ACE_Fortify", "FortifyTool"], 15, nil, 35, nil, true, true, true, true] call BIS_fnc_advHint;
+};

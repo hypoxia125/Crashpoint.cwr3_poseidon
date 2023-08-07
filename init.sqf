@@ -1,5 +1,7 @@
 DEBUG = true;
 
+if !(isMultiplayer) exitWith {endMission "SP"};
+
 // Variables
 LoadoutHash = createHashMapFromArray [
     ["cwr3_o_soldier_sl", [["CUP_arifle_AKS74","","","CUP_optic_PechenegScope",["CUP_30Rnd_545x39_AK_M",30],[],""],["CUP_launch_RPG18","","","",["CUP_RPG18_M",1],[],""],["hgun_Pistol_01_F","","","",["10Rnd_9x21_Mag",10],[],""],["CUP_U_O_RUS_Flora_2",[["ACE_fieldDressing",3],["ACE_elasticBandage",3],["ACE_packingBandage",3],["ACE_quikclot",3],["ACE_EarPlugs",1],["ACE_epinephrine",1],["ACE_morphine",1],["ACE_splint",1],["ACE_tourniquet",2],["SmokeShell",2,1]]],["cwr3_o_vest_6b2_officer",[["CUP_HandGrenade_RGD5",2,1],["CUP_30Rnd_545x39_AK_M",5,30]]],["cwr3_o_backpack_rd54",[["ACE_Canteen",1],["ACE_Humanitarian_Ration",1],["ACE_EntrenchingTool",1],["ACE_MapTools",1],["ACE_Flashlight_MX991",1]]],"cwr3_o_headgear_ssh68","",[],["ItemMap","","ItemRadio","ItemCompass","ItemWatch",""]]],
@@ -26,7 +28,8 @@ LoadoutHash = createHashMapFromArray [
             ["optic_sos", 1],
             ["CUP_20Rnd_762x51_DMR", 10],
             ["cwr3_lmg_m60e3", 1],
-            ["CUP_100Rnd_TE4_LRT4_Red_Tracer_762x51_Belt_M", 5]
+            ["CUP_100Rnd_TE4_LRT4_Red_Tracer_762x51_Belt_M", 5],
+            ["ace_csw_100rnd_127x99_mag", 2]
         ]
     ],
 
@@ -54,12 +57,11 @@ if (isServer) then {
         west,
         100,
         [
-            ["CamoNet_BLUFOR_F", 1 * _base],
-            ["Land_BagFence_End_F", 1 * _base],
-            ["Land_BagFence_Corner_F", 2 * _base],
-            ["Land_BagFence_Short_F", 2 * _base],
-            ["Land_BagFence_Long_F", 3 * _base],
-            ["Land_BagFence_Round_F", 3 * _base]
+            ["Land_BagFence_Round_F", 5],
+            ["Land_BagFence_Short_F", 5],
+            ["Land_BagFence_Long_F", 10],
+            ["Land_Plank_01_4m_F", 10],
+            ["Land_BagBunker_Small_F", 25]
         ]
     ] call ace_fortify_fnc_registerObjects;
 

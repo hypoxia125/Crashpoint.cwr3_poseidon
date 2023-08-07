@@ -21,3 +21,27 @@ if !(isServer) exitWith {};
 
     [missionNamespace, "HeliDestroyed", _thisScriptedEventHandler] call BIS_fnc_removeScriptedEventHandler;
 }];
+
+[] spawn {
+    waitUntil {
+        private _explosives = nearestObjects [HeliCrash, ["CUP_PipeBomb_Ammo"], 10, true];
+        count _explosives > 0
+    };
+    DEBUGMSG("Explosive placed by player");
+
+    waitUntil {
+        private _explosives = nearestObjects [HeliCrash, ["CUP_PipeBomb_Ammo"], 10, true];
+        _explosives findIf {!alive _x} != -1;
+    };
+    DEBUGMSG("Explosive detonated by player");
+
+    for "_i" from 1 to 10 do {
+        private _pos = HeliCrash getPos [10 * sqrt random 1, random 360];
+        private _bomb = createVehicle ["CUP_PipeBomb_Ammo", _pos, [], 0, "CAN_COLLIDE"];
+        _bomb setDamage 1;
+        sleep (random 0.5);
+    };
+    deleteVehicle HeliCrash;
+
+    [missionNamespace, "HeliDestroyed", [], false] call BIS_fnc_callScriptedEventHandler;
+};

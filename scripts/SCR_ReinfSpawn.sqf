@@ -3,12 +3,16 @@
 private _heliClass = "cwr3_b_uh60";
 private _pilotClass = "cwr3_b_soldier_pilot";
 private _crewClass = "cwr3_b_soldier_pilot";
-private _tillReinf = 60 * 20;
+
+/*
+// Moved to params
+USRF_TimeUntilRF = 60 * 20;
+*/
 
 waitUntil {
     sleep 1;
 
-    time >= _tillReinf
+    time >= USRF_TimeUntilRF
 };
 
 [missionNamespace, "US_Reinf", [], false] call BIS_fnc_callScriptedEventHandler;

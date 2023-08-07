@@ -49,6 +49,10 @@ respawnTemplates[] = { "Wave", "MenuPosition", "Spectator" };
 #include "config\CfgFunctions.hpp"
 #include "config\CfgSounds.hpp"
 #include "config\CfgTaskDescriptions.hpp"
+#include "config\CfgHints.hpp"
+#include "config\Params.hpp"
+
+#include "UI\config.hpp"
 
 /*--------------------------------------------------------------------------------------------------
 	OTHER SETTINGS

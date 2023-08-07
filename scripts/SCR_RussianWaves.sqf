@@ -15,16 +15,20 @@ private _enemyUnits = [
     "cwr3_o_soldier_mg"
 ];
 
-private _tillReinf = 60 * 0.1;
-private _waveTimerInitial = 60 * 5;
+/*
+// Move to params
+RURF_TimeUntilRF = 60 * 5;
+RURF_InitialTime = 60 * 5;
+RURF_PercentDecrease = 0.2;
+*/
 
 waitUntil {
     sleep 1;
 
-    time >= _tillReinf
+    time >= RURF_TimeUntilRF
 };
 
-private _waveTimer = _waveTimerInitial;
+private _waveTimer = RURF_InitialTime;
 while {true} do {
     private _msg = format ["Next Wave In %1 Seconds", _waveTimer];
     DEBUGMSG(_msg);
@@ -111,5 +115,5 @@ while {true} do {
     sleep (_waveTimer max 60);
 
     // change difficulty
-    _waveTimer = (_waveTimer - (_waveTimerInitial * 0.2) max 60);
+    _waveTimer = (_waveTimer - (RURF_PercentDecrease * 0.2) max RURF_MinimumWaveTime);
 };
