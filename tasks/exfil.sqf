@@ -17,6 +17,7 @@ if !(isServer) exitWith {};
 [missionNamespace, "Exfiltration", {
     ["exfil", "SUCCEEDED"] call BIS_fnc_taskSetState;
     [missionNamespace, "TaskCompleted", ["exfil"], false] call BIS_fnc_callScriptedEventHandler;
+    [{terminate HYP_OOB}] remoteExec ["call", [0,-2] select isDedicated];
     LOG_SYS("TaskCompleted Event Handler Called");
 
     [missionNamespace, "Exfiltration", _thisScriptedEventHandler] call BIS_fnc_removeScriptedEventHandler;

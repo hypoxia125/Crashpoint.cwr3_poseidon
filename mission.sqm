@@ -12,7 +12,7 @@ class EditorData
 	};
 	class ItemIDProvider
 	{
-		nextID=108;
+		nextID=162;
 	};
 	class MarkerIDProvider
 	{
@@ -20,18 +20,18 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=11;
+		nextID=13;
 	};
 	class Camera
 	{
-		pos[]={2927.8958,88.071175,1320.8516};
-		dir[]={-0.75798577,-0.32643226,-0.56471193};
-		up[]={-0.26177064,0.94522059,-0.19502346};
-		aside[]={-0.59743929,0,0.8019141};
+		pos[]={3068.7314,52.134357,1196.4054};
+		dir[]={0.83532697,-0.54967499,-0.0096880579};
+		up[]={0.54964072,0.83537793,-0.0063744751};
+		aside[]={-0.011597029,-3.193054e-008,-0.99993706};
 	};
 };
 binarizationWanted=0;
-sourceName="hawkDown";
+sourceName="Crashpoint";
 addons[]=
 {
 	"A3_Data_F_ParticleEffects",
@@ -12399,7 +12399,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={2868.4009,31.338228,1267.5442};
+				position[]={2868.4009,31.338213,1267.5437};
 				angles[]={0.51548296,0.92050409,6.0895762};
 			};
 			side="Empty";
@@ -12412,7 +12412,7 @@ class Mission
 			};
 			id=1;
 			type="cwr3_b_uh60_unarmed";
-			atlOffset=0.094013214;
+			atlOffset=0.093999863;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -12428,7 +12428,20 @@ class Mission
 						};
 					};
 				};
-				nAttributes=1;
+				class Attribute1
+				{
+					property="ENH_removeFromRemainsCollector";
+					expression="if (!is3DEN && _value) then {removeFromRemainsCollector [this]}";
+					class Value
+					{
+						class data
+						{
+							singleType="BOOL";
+							value=1;
+						};
+					};
+				};
+				nAttributes=2;
 			};
 		};
 		class Item2
@@ -13490,17 +13503,19 @@ class Mission
 				class Item5
 				{
 					dataType="Marker";
-					position[]={3368.1523,19.716072,1215.9067};
+					position[]={2742.2104,19.875446,1453.8949};
 					name="ru_wp_reinf_1_5";
 					type="mil_dot";
+					angle=250.72984;
 					id=48;
 				};
 				class Item6
 				{
 					dataType="Marker";
-					position[]={3410.4553,19.386406,1147.4661};
+					position[]={2870.4119,20.548279,1028.0317};
 					name="ru_wp_reinf_1_6";
 					type="mil_dot";
+					angle=250.86485;
 					id=49;
 				};
 				class Item7
@@ -13532,7 +13547,7 @@ class Mission
 				};
 			};
 			id=85;
-			atlOffset=11.929745;
+			atlOffset=13.946686;
 		};
 		class Item8
 		{

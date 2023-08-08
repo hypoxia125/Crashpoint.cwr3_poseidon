@@ -1,4 +1,5 @@
 DEBUG = true;
+#include "macros.hpp"
 
 if !(isMultiplayer) exitWith {endMission "SP"};
 
@@ -90,4 +91,15 @@ if (isServer) then {
     private _marker = createMarkerLocal ["marker_heli_x", getMarkerPos "marker_heli"];
     _marker setMarkerType "Contact_pencilTask1";
     _marker setMarkerColorLocal "ColorRed";
+
+    // On death handler for AI bodies
+    addMissionEventHandler ["EntityKilled", {
+        _this spawn {
+            params ["_unit", "_killer", "_instigator", "_useEffects"];
+
+            sleep 300;
+            deleteVehicle _unit;
+            LOG_SYS_1("Unit Corpse Deleted: %1", _unit);
+        };
+    }];
 };

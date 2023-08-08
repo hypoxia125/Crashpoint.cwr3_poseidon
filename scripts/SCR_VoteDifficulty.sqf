@@ -14,8 +14,8 @@ if (isServer) then {
     private _medVotes = missionNamespace getVariable ['HYP_VoteDifficulty_Med', 0];
     private _hardVotes = missionNamespace getVariable ['HYP_VoteDifficulty_Hard', 0];
 
-    private _winner = _easyVotes;
-    if (_medVotes > _winner) then {_winner = _medVotes};
+    private _winner = _medVotes;
+    if (_easyVotes > _winner) then {_winner = _easyVotes};
     if (_hardVotes > _winner) then {_winner = _hardVotes};
 
     private _text = switch _winner do {

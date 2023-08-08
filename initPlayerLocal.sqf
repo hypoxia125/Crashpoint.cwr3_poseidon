@@ -22,3 +22,24 @@ execVM "scripts\SCR_Diary.sqf";
 
     [["ACE_Fortify", "FortifyTool"], 15, nil, 35, nil, true, true, true, true] call BIS_fnc_advHint;
 };
+
+// Out of bounds
+HYP_OOB = [] spawn {
+    while {true} do {
+        waitUntil {alive player};
+
+        while {sleep 1; alive player} do {
+            private _inBounds = player inArea "marker_4";
+
+            if !(_inBounds) then {
+                private _i = 0;
+                while {sleep 1; !(player inArea "marker_4")} do {
+                    hint "Turn back! You are out of the mission zone!";
+                    if (_i > 30) then {player setDamage 1};
+                    _i = _i + 1;
+                };
+                hint "Welcome back!";
+            };
+        };
+    };
+};

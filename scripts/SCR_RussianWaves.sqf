@@ -12,6 +12,24 @@ private _enemyUnits = [
     "cwr3_o_soldier_mg",
     "cwr3_o_soldier_gl",
     "cwr3_o_soldier_at_rpg7",
+    "cwr3_o_soldier_mg",
+
+    // repeat
+    "cwr3_o_soldier",
+    "cwr3_o_soldier",
+    "cwr3_o_soldier",
+    "cwr3_o_soldier_mg",
+    "cwr3_o_soldier_gl",
+    "cwr3_o_soldier_at_rpg7",
+    "cwr3_o_soldier_mg",
+
+    // repeat
+    "cwr3_o_soldier",
+    "cwr3_o_soldier",
+    "cwr3_o_soldier",
+    "cwr3_o_soldier_mg",
+    "cwr3_o_soldier_gl",
+    "cwr3_o_soldier_at_rpg7",
     "cwr3_o_soldier_mg"
 ];
 
@@ -37,7 +55,7 @@ while {true} do {
     // create heli
     private _marker = format ["ru_spawn_reinf_%1", ceil random 2];
     private _posStart = getMarkerPos _marker vectorAdd [0,0,100];
-    private _heli = createVehicle [_heliClass, _posStart, [], 0, "FLY"];
+    private _heli = createVehicle [_heliClass, _posStart, [], 30, "FLY"];
     _heli setDir (getDir _heli + (_heli getRelDir (getPosATL heliCrash)));
 
     // create crew
@@ -101,10 +119,14 @@ while {true} do {
     ];
 
     // create enemy units
+    private _playerCount = count ([true] call HYP_fnc_getPlayers);
+    private _numToSpawn = ceil linearConversion [1, playableSlotsNumber west, _playerCount, 8, count fullCrew [_heli, "CARGO", true], true];
+
     private _group = createGroup [ENEMY_SIDE, true];
-    _enemyUnits apply {
-        private _unit = _group createUnit [_x, [0,0,0], [], 0, "NONE"];
-        private _loadout = LoadoutHash get _x;
+    for "_i" from 0 to (_numToSpawn - 1) do {
+        private _class = _enemyUnits select _i;
+        private _unit = _group createUnit [_class, [0,0,0], [], 0, "NONE"];
+        private _loadout = LoadoutHash get _class;
         _unit setUnitLoadout _loadout;
         _unit moveInCargo _heli;
     };
@@ -115,6 +137,6 @@ while {true} do {
 
     sleep (_waveTimer max 60);
 
-    // change difficulty
-    _waveTimer = (_waveTimer - (RURF_PercentDecrease * 0.2) max RURF_MinimumWaveTime);
+    // change wave time
+    _waveTimer = (_waveTimer - (_waveTimer * RURF_PercentDecrease) max RURF_MinimumWaveTime);
 };
