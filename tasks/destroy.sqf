@@ -31,7 +31,9 @@ if !(isServer) exitWith {};
 
     waitUntil {
         private _explosives = nearestObjects [HeliCrash, ["CUP_PipeBomb_Ammo"], 10, true];
-        _explosives findIf {!alive _x} != -1;
+        _explosives findIf {!alive _x} != -1
+        ||
+        _explosives isEqualTo [];
     };
     LOG_SYS("Explosive detonated by player");
 

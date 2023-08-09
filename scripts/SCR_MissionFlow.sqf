@@ -10,6 +10,7 @@ if (isServer) then {
 };
 
 waitUntil {
+    sleep 1;
     if !(isMultiplayer) exitWith {true};
 	!isNil { missionNamespace getVariable "MPSync_EndTime" }
 };
@@ -30,7 +31,7 @@ if (isServer) then {
 
     if (MissionVoting) then {
         ["scripts\SCR_VoteDifficulty.sqf"] remoteExec ["execVM"];
-        waitUntil {missionNamespace getVariable ["MissionVoting_Complete", false]}
+        waitUntil {sleep 1; missionNamespace getVariable ["MissionVoting_Complete", false]}
     };
 
     [] spawn {

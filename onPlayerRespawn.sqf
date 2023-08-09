@@ -24,6 +24,9 @@ private _goggles = [
 ];
 if (random 1 < 0.50) then {_newUnit addGoggles selectRandom _goggles};
 
+// set all medical traits
+_newUnit setUnitTrait ["medic", true];
+
 // Fade In
 sleep 1;
 titleText ["", "BLACK IN", 3, true, false];

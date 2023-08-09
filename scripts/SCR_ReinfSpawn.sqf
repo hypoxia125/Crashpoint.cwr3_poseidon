@@ -124,6 +124,7 @@ _wp setWaypointStatements [
     scriptName "Heli Landing - Smokes";
 
     waitUntil {
+        sleep 0.5;
         getPosATL _heli select 2 <= 20
     };
 

@@ -20,14 +20,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=13;
+		nextID=19;
 	};
 	class Camera
 	{
-		pos[]={3068.7314,52.134357,1196.4054};
-		dir[]={0.83532697,-0.54967499,-0.0096880579};
-		up[]={0.54964072,0.83537793,-0.0063744751};
-		aside[]={-0.011597029,-3.193054e-008,-0.99993706};
+		pos[]={2843.0168,74.587212,1206.1647};
+		dir[]={0.32010582,-0.4960531,0.80713308};
+		up[]={0.18287563,0.86829221,0.4611131};
+		aside[]={0.92956394,1.4901161e-008,-0.36866143};
 	};
 };
 binarizationWanted=0;
@@ -13336,7 +13336,7 @@ class Mission
 						class data
 						{
 							singleType="SCALAR";
-							value=3;
+							value=30;
 						};
 					};
 				};
@@ -13515,7 +13515,7 @@ class Mission
 					position[]={2870.4119,20.548279,1028.0317};
 					name="ru_wp_reinf_1_6";
 					type="mil_dot";
-					angle=250.86485;
+					angle=250.86481;
 					id=49;
 				};
 				class Item7

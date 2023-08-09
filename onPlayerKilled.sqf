@@ -10,6 +10,8 @@ titleText ["", "BLACK OUT", 1e-3, true, false];
 0 fadeSpeech 0;
 0 fadeEnvironment 0;
 
+player setVariable ["survivor", false, true];
+
 // Wait
 waitUntil {visibleMap};
 

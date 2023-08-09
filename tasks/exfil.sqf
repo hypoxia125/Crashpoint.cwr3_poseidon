@@ -24,6 +24,7 @@ if !(isServer) exitWith {};
 }] call BIS_fnc_addScriptedEventHandler;
 
 waitUntil {
+    sleep 1;
     ["exfil"] call BIS_fnc_taskCompleted
     &&
     {US_Heli distance US_Carrier <= 1000;}

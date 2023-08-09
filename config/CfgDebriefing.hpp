@@ -12,3 +12,26 @@ class CfgDebriefing
 	};
 };
 */
+
+class CfgDebriefing
+{
+    class failure_death
+    {
+        title = "Mission Failed";
+        subtitle = "All Survivors Killed";
+        description = "All starting survivors have been killed. At least one must survive the whole mission";
+        pictureBackground = "";
+        picture = "kia";
+        pictureColor[] = { 0.0, 0.3, 0.6, 1 };
+    };
+
+    class victory
+    {
+        title = "Mission Success";
+        subtitle = "All Primary Objectives Completed";
+        description = "";
+        pictureBackground = "";
+        picture = "b_inf";
+        pictureColor[] = { 0.0, 0.3, 0.6, 1 };
+    };
+};

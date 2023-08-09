@@ -39,7 +39,7 @@ class CfgTaskDescriptions
     class fortify
     {
         title = "Fortify Your Position";
-        description = "We are going to have to defend this location. We could use some sand bag walls or other defensive fortifications.<br/><br/>Use the fortify tool (Self ACE Interaction w/ Fortify Tool in Inventory) to build fortifications."
+        description = "We are going to have to defend this location. We could use some sand bag walls or other defensive fortifications.<br/><br/>Use the fortify tool (Self ACE Interaction w/ Fortify Tool in Inventory) to build fortifications.";
     };
     class exfil
     {

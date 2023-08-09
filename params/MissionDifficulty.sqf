@@ -15,7 +15,7 @@ switch _value do {
     case 1: {
         USRF_TimeUntilRF = CONVERTTO_MIN(15);
 
-        RURF_TimeUntilRF = CONVERTTO_MIN(5);
+        RURF_TimeUntilRF = CONVERTTO_MIN(3);
         RURF_InitialTime = CONVERTTO_MIN(5);
         RURF_PercentDecrease = CONVERTTO_MIN(0.1);
         RURF_MinimumWaveTime = 120;
@@ -24,7 +24,7 @@ switch _value do {
     case 2: {
         USRF_TimeUntilRF = CONVERTTO_MIN(23);
 
-        RURF_TimeUntilRF = CONVERTTO_MIN(3);
+        RURF_TimeUntilRF = CONVERTTO_MIN(2);
         RURF_InitialTime = CONVERTTO_MIN(5);
         RURF_PercentDecrease = CONVERTTO_MIN(0.2);
         RURF_MinimumWaveTime = 60;

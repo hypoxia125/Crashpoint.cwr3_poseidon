@@ -15,6 +15,7 @@ if !(isServer) exitWith {};
 ] call BIS_fnc_taskCreate;
 
 waitUntil {
+    sleep 1;
     private _players = [true] call HYP_fnc_getPlayers;
     
     _players findIf {

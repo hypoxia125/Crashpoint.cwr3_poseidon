@@ -1,7 +1,5 @@
-DEBUG = true;
+DEBUG = false;
 #include "macros.hpp"
-
-if !(isMultiplayer) exitWith {endMission "SP"};
 
 // Variables
 LoadoutHash = createHashMapFromArray [
@@ -55,7 +53,7 @@ if (isServer) then {
     private _base = 5;
     [
         west,
-        100,
+        150,
         [
             ["Land_BagFence_Round_F", 5],
             ["Land_BagFence_Short_F", 5],
@@ -101,5 +99,20 @@ if (isServer) then {
             deleteVehicle _unit;
             LOG_SYS_1("Unit Corpse Deleted: %1", _unit);
         };
+    }];
+
+    // AI Skill Rebalancer
+    addMissionEventHandler ["PlayerConnected", {
+        params ["_id", "_uid", "_name", "_jip", "_owner", "_idstr"];
+
+        [east,0.5,0.3,1.0,1.0,10] call HYP_fnc_rebalanceAISkill;
+        LOG_SYS("AI Rebalanced - Player Joined");
+    }];
+
+    addMissionEventHandler ["PlayerDisconnected", {
+        params ["_id", "_uid", "_name", "_jip", "_owner", "_idstr"];
+
+        [east,0.5,0.3,1.0,1.0,10] call HYP_fnc_rebalanceAISkill;
+        LOG_SYS("AI Rebalanced - Player Left");
     }];
 };
