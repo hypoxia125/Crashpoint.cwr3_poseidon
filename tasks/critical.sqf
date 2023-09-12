@@ -1,4 +1,4 @@
-#include "macros.hpp"
+#include "script_component.hpp"
 
 if !(isServer) exitWith {};
 
@@ -15,7 +15,7 @@ if !(isServer) exitWith {};
 ] call BIS_fnc_taskCreate;
 CriticalObjectives = ["survive"];
 
-[missionNamespace, "TaskCompleted", {
+[missionNamespace, QGVAR(TaskCompleted), {
     params ["_task"];
 
     private _subTasks = CriticalObjectives;
@@ -23,6 +23,6 @@ CriticalObjectives = ["survive"];
 
     if (_subsCompleted) then {
         ["critical", "SUCCEEDED"] call BIS_fnc_taskSetState;
-        [missionNamespace, "TaskCompleted", _thisScriptedEventHandler] call BIS_fnc_removeScriptedEventHandler;
+        [missionNamespace, QGVAR(TaskCompleted), _thisScriptedEventHandler] call BIS_fnc_removeScriptedEventHandler;
     };
 }] call BIS_fnc_addScriptedEventHandler;

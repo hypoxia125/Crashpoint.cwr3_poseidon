@@ -1,3 +1,5 @@
+#include "script_component.hpp"
+
 params ["_control", ["_config", configNull]];
 
 private _texts = [

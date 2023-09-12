@@ -20,18 +20,18 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=19;
+		nextID=25;
 	};
 	class Camera
 	{
-		pos[]={2843.0168,74.587212,1206.1647};
-		dir[]={0.32010582,-0.4960531,0.80713308};
-		up[]={0.18287563,0.86829221,0.4611131};
-		aside[]={0.92956394,1.4901161e-008,-0.36866143};
+		pos[]={2852.478,54.68766,1224.2634};
+		dir[]={0.30879909,-0.52095515,0.79576939};
+		up[]={0.18846473,0.85358411,0.48567003};
+		aside[]={0.93226838,0,-0.36176765};
 	};
 };
 binarizationWanted=0;
-sourceName="Crashpoint";
+sourceName="hawkDown";
 addons[]=
 {
 	"A3_Data_F_ParticleEffects",
@@ -12407,7 +12407,7 @@ class Mission
 			class Attributes
 			{
 				health=0;
-				name="heliCrash";
+				name="hyp_mission_heliCrash";
 				disableSimulation=1;
 			};
 			id=1;
@@ -13059,7 +13059,7 @@ class Mission
 			{
 				position[]={0,-20.1,0};
 			};
-			name="HQ";
+			name="hyp_mission_hq";
 			id=19;
 			type="ModuleHQ_F";
 			class CustomAttributes
@@ -13336,7 +13336,7 @@ class Mission
 						class data
 						{
 							singleType="SCALAR";
-							value=30;
+							value=10;
 						};
 					};
 				};
@@ -13463,7 +13463,7 @@ class Mission
 				{
 					dataType="Marker";
 					position[]={1777.663,10,3566.52};
-					name="ru_spawn_reinf_1";
+					name="hyp_mission_ru_spawn_reinf_1";
 					type="mil_dot";
 					id=30;
 					atlOffset=3.8146973e-006;
@@ -13472,7 +13472,7 @@ class Mission
 				{
 					dataType="Marker";
 					position[]={3012.6292,40.240963,1424.3596};
-					name="ru_wp_reinf_1_1";
+					name="hyp_mission_ru_wp_reinf_1_1";
 					type="mil_dot";
 					id=44;
 				};
@@ -13480,7 +13480,7 @@ class Mission
 				{
 					dataType="Marker";
 					position[]={3103.0637,39.233898,1377.4312};
-					name="ru_wp_reinf_1_2";
+					name="hyp_mission_ru_wp_reinf_1_2";
 					type="mil_dot";
 					id=45;
 				};
@@ -13488,7 +13488,7 @@ class Mission
 				{
 					dataType="Marker";
 					position[]={3223.5874,40.142227,1013.6921};
-					name="ru_wp_reinf_1_3";
+					name="hyp_mission_ru_wp_reinf_1_3";
 					type="mil_dot";
 					id=46;
 				};
@@ -13496,7 +13496,7 @@ class Mission
 				{
 					dataType="Marker";
 					position[]={3160.4893,40.783745,960.3335};
-					name="ru_wp_reinf_1_4";
+					name="hyp_mission_ru_wp_reinf_1_4";
 					type="mil_dot";
 					id=47;
 				};
@@ -13504,7 +13504,7 @@ class Mission
 				{
 					dataType="Marker";
 					position[]={2742.2104,19.875446,1453.8949};
-					name="ru_wp_reinf_1_5";
+					name="hyp_mission_ru_wp_reinf_1_5";
 					type="mil_dot";
 					angle=250.72984;
 					id=48;
@@ -13513,7 +13513,7 @@ class Mission
 				{
 					dataType="Marker";
 					position[]={2870.4119,20.548279,1028.0317};
-					name="ru_wp_reinf_1_6";
+					name="hyp_mission_ru_wp_reinf_1_6";
 					type="mil_dot";
 					angle=250.86481;
 					id=49;
@@ -13522,7 +13522,7 @@ class Mission
 				{
 					dataType="Marker";
 					position[]={2704.9541,29.969,1196.741};
-					name="us_wp_reinf_1_1";
+					name="hyp_mission_us_wp_reinf_1_1";
 					type="mil_dot";
 					id=16;
 					atlOffset=0.00045776367;
@@ -13531,7 +13531,7 @@ class Mission
 				{
 					dataType="Marker";
 					position[]={4320.459,29.5,2739.5508};
-					name="ru_spawn_reinf_2";
+					name="hyp_mission_ru_spawn_reinf_2";
 					type="mil_dot";
 					id=99;
 					atlOffset=3.8146973e-006;
@@ -13540,7 +13540,7 @@ class Mission
 				{
 					dataType="Marker";
 					position[]={218.61227,29.014406,183.69827};
-					name="us_spawn_reinf_1";
+					name="hyp_mission_us_spawn_reinf_1";
 					type="mil_dot";
 					id=101;
 					atlOffset=23.027637;
@@ -13553,7 +13553,7 @@ class Mission
 		{
 			dataType="Marker";
 			position[]={2868.5869,29.249001,1267.042};
-			name="marker_4";
+			name="hyp_mission_AO";
 			markerType="ELLIPSE";
 			type="";
 			colorName="ColorWEST";

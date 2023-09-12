@@ -1,4 +1,4 @@
-#include "macros.hpp"
+#include "script_component.hpp"
 
 if !(isServer) exitWith {};
 
@@ -6,7 +6,7 @@ if !(isServer) exitWith {};
     PLAYER_SIDE,
     ["defend", "primary"],
     "defend",
-    HeliCrash,
+    GVAR(HeliCrash),
     "ASSIGNED",
     10,
     true,
@@ -14,16 +14,16 @@ if !(isServer) exitWith {};
     false
 ] call BIS_fnc_taskCreate;
 
-EH_US_Reinf_Defend = [missionNamespace, "US_Reinf", {
+EH_US_Reinf_Defend = [missionNamespace, QGVAR(US_Reinf), {
     ["defend", "SUCCEEDED"] call BIS_fnc_taskSetState;
-    [missionNamespace, "TaskCompleted", ["defend"], false] call BIS_fnc_callScriptedEventHandler;
+    [missionNamespace, QGVAR(TaskCompleted), ["defend"], false] call BIS_fnc_callScriptedEventHandler;
 
-    LOG_SYS("DEFEND Task Completed");
-    LOG_SYS("TaskCompleted Event Handler Called");
+    LOG("DEFEND Task Completed");
+    LOG("TaskCompleted Event Handler Called");
 
-    [missionNamespace, "US_Reinf", EH_US_Reinf_Defend] call BIS_fnc_removeScriptedEventHandler;
+    [missionNamespace, QGVAR(US_Reinf), EH_US_Reinf_Defend] call BIS_fnc_removeScriptedEventHandler;
 
-    LOG_SYS_1("Removing Scripted Handler | US_Reinf | ID: %1",EH_US_Reinf_Defend);
+    LOG_1("Removing Scripted Handler | US_Reinf | ID: %1",EH_US_Reinf_Defend);
 }] call BIS_fnc_addScriptedEventHandler;
 
-LOG_SYS_1("DEFEND SUBSCRIPTION ID: %1",EH_US_Reinf_Defend);
+LOG_1("DEFEND SUBSCRIPTION ID: %1",EH_US_Reinf_Defend);

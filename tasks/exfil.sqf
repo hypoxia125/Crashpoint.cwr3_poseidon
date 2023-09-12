@@ -1,12 +1,12 @@
-#include "macros.hpp"
+#include "script_component.hpp"
 
 if !(isServer) exitWith {};
 
 [
-    west,
+    PLAYER_SIDE,
     ["exfil", "primary"],
     "exfil",
-    US_Heli,
+    GVAR(US_Heli),
     "CREATED",
     7,
     false,
@@ -14,20 +14,20 @@ if !(isServer) exitWith {};
     true
 ] call BIS_fnc_taskCreate;
 
-[missionNamespace, "Exfiltration", {
+[missionNamespace, QGVAR(Exfil), {
     ["exfil", "SUCCEEDED"] call BIS_fnc_taskSetState;
-    [missionNamespace, "TaskCompleted", ["exfil"], false] call BIS_fnc_callScriptedEventHandler;
-    [{terminate HYP_OOB}] remoteExec ["call", [0,-2] select isDedicated];
-    LOG_SYS("TaskCompleted Event Handler Called");
+    [missionNamespace, QGVAR(TaskCompleted), ["exfil"], false] call BIS_fnc_callScriptedEventHandler;
+    [{terminate GVAR(OutOfBounds)}] remoteExec ["call", [0,-2] select isDedicated];
+    LOG("TaskCompleted Event Handler Called");
 
-    [missionNamespace, "Exfiltration", _thisScriptedEventHandler] call BIS_fnc_removeScriptedEventHandler;
+    [missionNamespace, QGVAR(Exfil), _thisScriptedEventHandler] call BIS_fnc_removeScriptedEventHandler;
 }] call BIS_fnc_addScriptedEventHandler;
 
 waitUntil {
     sleep 1;
     ["exfil"] call BIS_fnc_taskCompleted
     &&
-    {US_Heli distance US_Carrier <= 1000;}
+    {GVAR(US_Heli) distance US_Carrier <= 1000;}
 };
 
 ["victory", true, true, true, true] remoteExec ["BIS_fnc_endMission"];

@@ -1,4 +1,4 @@
-#include "macros.hpp"
+#include "script_component.hpp"
 
 if !(isServer) exitWith {};
 
@@ -16,7 +16,7 @@ if !(isServer) exitWith {};
 
 PrimaryObjectives = ["defend", "destroy", "fortify", "exfil"];
 
-[missionNamespace, "TaskCompleted", {
+[missionNamespace, QGVAR(TaskCompleted), {
     params ["_task"];
 
     private _subTasks = PrimaryObjectives;
@@ -24,6 +24,6 @@ PrimaryObjectives = ["defend", "destroy", "fortify", "exfil"];
 
     if (_subsCompleted) then {
         ["primary", "SUCCEEDED", false] call BIS_fnc_taskSetState;
-        [missionNamespace, "TaskCompleted", _thisScriptedEventHandler] call BIS_fnc_removeScriptedEventHandler;
+        [missionNamespace, QGVAR(TaskCompleted), _thisScriptedEventHandler] call BIS_fnc_removeScriptedEventHandler;
     };
 }] call BIS_fnc_addScriptedEventHandler;

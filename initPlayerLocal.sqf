@@ -1,3 +1,5 @@
+#include "script_component.hpp"
+
 params ["_player", "_didJIP"];
 
 // Spectator
@@ -16,24 +18,17 @@ params ["_player", "_didJIP"];
 
 execVM "scripts\SCR_Diary.sqf";
 
-//Fortify Tool Hint
-[] spawn {
-    waitUntil {alive player};
-
-    [["ACE_Fortify", "FortifyTool"], 15, nil, 35, nil, true, true, true, true] call BIS_fnc_advHint;
-};
-
 // Out of bounds
-HYP_OOB = [] spawn {
+GVAR(OutOfBounds) = [] spawn {
     while {true} do {
         waitUntil {alive player};
 
         while {sleep 1; alive player} do {
-            private _inBounds = player inArea "marker_4";
+            private _inBounds = player inArea QGVAR(AO);
 
             if !(_inBounds) then {
                 private _i = 0;
-                while {sleep 1; !(player inArea "marker_4")} do {
+                while {sleep 1; !(player inArea QGVAR(AO))} do {
                     hint "Turn back! You are out of the mission zone!";
                     if (_i > 30) then {player setDamage 1};
                     _i = _i + 1;

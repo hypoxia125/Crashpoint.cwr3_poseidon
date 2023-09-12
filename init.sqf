@@ -1,8 +1,7 @@
-DEBUG = false;
-#include "macros.hpp"
+#include "script_component.hpp"
 
 // Variables
-LoadoutHash = createHashMapFromArray [
+GVAR(hmap_loadouts) = createHashMapFromArray [
     ["cwr3_o_soldier_sl", [["CUP_arifle_AKS74","","","CUP_optic_PechenegScope",["CUP_30Rnd_545x39_AK_M",30],[],""],["CUP_launch_RPG18","","","",["CUP_RPG18_M",1],[],""],["hgun_Pistol_01_F","","","",["10Rnd_9x21_Mag",10],[],""],["CUP_U_O_RUS_Flora_2",[["ACE_fieldDressing",3],["ACE_elasticBandage",3],["ACE_packingBandage",3],["ACE_quikclot",3],["ACE_EarPlugs",1],["ACE_epinephrine",1],["ACE_morphine",1],["ACE_splint",1],["ACE_tourniquet",2],["SmokeShell",2,1]]],["cwr3_o_vest_6b2_officer",[["CUP_HandGrenade_RGD5",2,1],["CUP_30Rnd_545x39_AK_M",5,30]]],["cwr3_o_backpack_rd54",[["ACE_Canteen",1],["ACE_Humanitarian_Ration",1],["ACE_EntrenchingTool",1],["ACE_MapTools",1],["ACE_Flashlight_MX991",1]]],"cwr3_o_headgear_ssh68","",[],["ItemMap","","ItemRadio","ItemCompass","ItemWatch",""]]],
     ["cwr3_o_soldier", [["CUP_arifle_AKS74","","","",["CUP_30Rnd_545x39_AK_M",30],[],""],["CUP_launch_RPG18","","","",["CUP_RPG18_M",1],[],""],["hgun_Pistol_01_F","","","",["10Rnd_9x21_Mag",10],[],""],["CUP_U_O_RUS_Flora_2",[["ACE_fieldDressing",3],["ACE_elasticBandage",3],["ACE_packingBandage",3],["ACE_quikclot",3],["ACE_EarPlugs",1],["ACE_epinephrine",1],["ACE_morphine",1],["ACE_splint",1],["ACE_tourniquet",2],["SmokeShell",2,1]]],["cwr3_o_vest_6b2_ak74",[["CUP_HandGrenade_RGD5",2,1],["CUP_30Rnd_545x39_AK_M",5,30]]],["cwr3_o_backpack_rd54",[["ACE_Canteen",1],["ACE_Humanitarian_Ration",1],["ACE_EntrenchingTool",1],["ACE_Flashlight_MX991",1]]],"cwr3_o_headgear_ssh68","",[],["ItemMap","","ItemRadio","ItemCompass","ItemWatch",""]]],
     ["cwr3_o_soldier_gl", [["CUP_arifle_AKS74_GL_Early","","","",["CUP_30Rnd_545x39_AK_M",30],["CUP_1Rnd_HE_GP25_M",1],""],["CUP_launch_RPG18","","","",["CUP_RPG18_M",1],[],""],["hgun_Pistol_01_F","","","",["10Rnd_9x21_Mag",10],[],""],["CUP_U_O_RUS_Flora_2",[["ACE_fieldDressing",3],["ACE_elasticBandage",3],["ACE_packingBandage",3],["ACE_quikclot",3],["ACE_EarPlugs",1],["ACE_epinephrine",1],["ACE_morphine",1],["ACE_splint",1],["ACE_tourniquet",2],["SmokeShell",2,1]]],["cwr3_o_vest_6b2_gl",[["CUP_HandGrenade_RGD5",2,1],["CUP_30Rnd_545x39_AK_M",5,30],["CUP_1Rnd_HE_GP25_M",10,1],["CUP_1Rnd_SMOKE_GP25_M",2,1],["CUP_1Rnd_SmokeRed_GP25_M",2,1],["CUP_1Rnd_SmokeGreen_GP25_M",2,1]]],["cwr3_o_backpack_rd54",[["ACE_Canteen",1],["ACE_Humanitarian_Ration",1],["ACE_EntrenchingTool",1],["ACE_Flashlight_MX991",1]]],"cwr3_o_headgear_ssh68","",[],["ItemMap","","ItemRadio","ItemCompass","ItemWatch",""]]],
@@ -49,25 +48,12 @@ execVM "scripts\SCR_MissionFlow.sqf";
 
 // Server Only
 if (isServer) then {
-    // ACE Fortify System
-    private _base = 5;
-    [
-        west,
-        150,
-        [
-            ["Land_BagFence_Round_F", 5],
-            ["Land_BagFence_Short_F", 5],
-            ["Land_BagFence_Long_F", 10],
-            ["Land_Plank_01_4m_F", 10],
-            ["Land_BagBunker_Small_F", 25]
-        ]
-    ] call ace_fortify_fnc_registerObjects;
-
+    
     // Crates
     private _crates = getMissionLayerEntities "crates" select 0;
     _crates apply {
         private _crate = _x;
-        private _loadout = LoadoutHash get (typeOf _crate);
+        private _loadout = GVAR(hmap_loadouts) get (typeOf _crate);
 
         clearItemCargoGlobal _crate;
         clearWeaponCargoGlobal _crate;
@@ -97,22 +83,27 @@ if (isServer) then {
 
             sleep 300;
             deleteVehicle _unit;
-            LOG_SYS_1("Unit Corpse Deleted: %1", _unit);
+            LOG_1("Unit Corpse Deleted: %1", _unit);
         };
     }];
 
     // AI Skill Rebalancer
+    
+    // Initial
+    [ENEMY_SIDE,0.5,0.3,1.0,1.0,10] call HYP_fnc_rebalanceAISkill;
+    
+    // Residual
     addMissionEventHandler ["PlayerConnected", {
         params ["_id", "_uid", "_name", "_jip", "_owner", "_idstr"];
 
-        [east,0.5,0.3,1.0,1.0,10] call HYP_fnc_rebalanceAISkill;
-        LOG_SYS("AI Rebalanced - Player Joined");
+        [ENEMY_SIDE,0.5,0.3,1.0,1.0,10] call HYP_fnc_rebalanceAISkill;
+        LOG("AI Rebalanced - Player Joined");
     }];
 
     addMissionEventHandler ["PlayerDisconnected", {
         params ["_id", "_uid", "_name", "_jip", "_owner", "_idstr"];
 
-        [east,0.5,0.3,1.0,1.0,10] call HYP_fnc_rebalanceAISkill;
-        LOG_SYS("AI Rebalanced - Player Left");
+        [ENEMY_SIDE,0.5,0.3,1.0,1.0,10] call HYP_fnc_rebalanceAISkill;
+        LOG("AI Rebalanced - Player Left");
     }];
 };

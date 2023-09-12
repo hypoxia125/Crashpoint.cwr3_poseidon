@@ -1,3 +1,5 @@
+#include "script_component.hpp"
+
 // Create display
 if (hasInterface) then {
     findDisplay 46 createDisplay "HYP_VoteDifficulty";
@@ -10,9 +12,9 @@ if (isServer) then {
     // close displays
     ["scripts\UI\VoteDifficulty\onButtonClickCancel.sqf"] remoteExec ["execVM", [0,-2] select isDedicated];
 
-    private _easyVotes = missionNamespace getVariable ['HYP_VoteDifficulty_Easy', 0];
-    private _medVotes = missionNamespace getVariable ['HYP_VoteDifficulty_Med', 0];
-    private _hardVotes = missionNamespace getVariable ['HYP_VoteDifficulty_Hard', 0];
+    private _easyVotes = missionNamespace getVariable [QGVAR(VoteDifficulty_Easy), 0];
+    private _medVotes = missionNamespace getVariable [QGVAR(VoteDifficulty_Med), 0];
+    private _hardVotes = missionNamespace getVariable [QGVAR(VoteDifficulty_Hard), 0];
 
     private _winner = _medVotes;
     if (_easyVotes > _winner) then {_winner = _easyVotes};
@@ -33,5 +35,5 @@ if (isServer) then {
     };
     _value execVM "params\MissionDifficulty.sqf";
 
-    missionNamespace setVariable ["MissionVoting_Complete", true, true];
+    missionNamespace setVariable [QGVAR(MissionVoting_Completed), true, true];
 };

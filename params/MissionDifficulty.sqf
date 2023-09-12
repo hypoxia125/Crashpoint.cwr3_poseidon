@@ -1,45 +1,61 @@
+#include "script_component.hpp"
+
 params ["_value"];
 
-#define CONVERTTO_MIN(value) (value * 60)
+GVAR(USRF_TimeUntilRF) = CONVERT_MIN_TO_SEC(20);
 
-USRF_TimeUntilRF = CONVERTTO_MIN(20);
+GVAR(RURF_TimeUntilRF) = CONVERT_MIN_TO_SEC(5);
+GVAR(RURF_InitialTime) = CONVERT_MIN_TO_SEC(5);
+GVAR(RURF_PercentDecrease) = 0.2;
+GVAR(RURF_MinimumWaveTime) = 60;
 
-RURF_TimeUntilRF = CONVERTTO_MIN(5);
-RURF_InitialTime = CONVERTTO_MIN(5);
-RURF_PercentDecrease = 0.2;
-RURF_MinimumWaveTime = 60;
+GVAR(RURF_MaxUnits) = 32;
 
-MissionVoting = false;
+GVAR(Fortify_Resources) = 150;
+
+GVAR(MissionVoting) = false;
 
 switch _value do {
     case 1: {
-        USRF_TimeUntilRF = CONVERTTO_MIN(15);
+        GVAR(USRF_TimeUntilRF) = CONVERT_MIN_TO_SEC(15);
 
-        RURF_TimeUntilRF = CONVERTTO_MIN(3);
-        RURF_InitialTime = CONVERTTO_MIN(5);
-        RURF_PercentDecrease = CONVERTTO_MIN(0.1);
-        RURF_MinimumWaveTime = 120;
+        GVAR(RURF_TimeUntilRF) = CONVERT_MIN_TO_SEC(3);
+        GVAR(RURF_InitialTime) = CONVERT_MIN_TO_SEC(5);
+        GVAR(RURF_PercentDecrease) = 0.1;
+        GVAR(RURF_MinimumWaveTime) = CONVERT_MIN_TO_SEC(2);
+
+        GVAR(RURF_MaxUnits) = round (32 * 0.7);
+
+        GVAR(Fortify_Resources) = 500;
     };
 
     case 2: {
-        USRF_TimeUntilRF = CONVERTTO_MIN(23);
+        GVAR(USRF_TimeUntilRF) = CONVERT_MIN_TO_SEC(23);
 
-        RURF_TimeUntilRF = CONVERTTO_MIN(2);
-        RURF_InitialTime = CONVERTTO_MIN(5);
-        RURF_PercentDecrease = CONVERTTO_MIN(0.2);
-        RURF_MinimumWaveTime = 60;
+        GVAR(RURF_TimeUntilRF) = CONVERT_MIN_TO_SEC(2);
+        GVAR(RURF_InitialTime) = CONVERT_MIN_TO_SEC(5);
+        GVAR(RURF_PercentDecrease) = 0.2;
+        GVAR(RURF_MinimumWaveTime) = CONVERT_MIN_TO_SEC(1.5);
+
+        GVAR(RURF_MaxUnits) = round (32 * 1);
+
+        GVAR(Fortify_Resources) = 300;
     };
 
     case 3: {
-        USRF_TimeUntilRF = CONVERTTO_MIN(24);
+        GVAR(USRF_TimeUntilRF) = CONVERT_MIN_TO_SEC(24);
 
-        RURF_TimeUntilRF = CONVERTTO_MIN(1);
-        RURF_InitialTime = CONVERTTO_MIN(5);
-        RURF_PercentDecrease = CONVERTTO_MIN(0.3);
-        RURF_MinimumWaveTime = 30;
+        GVAR(RURF_TimeUntilRF) = CONVERT_MIN_TO_SEC(1);
+        GVAR(RURF_InitialTime) = CONVERT_MIN_TO_SEC(5);
+        GVAR(RURF_PercentDecrease) = 0.3;
+        GVAR(RURF_MinimumWaveTime) = CONVERT_MIN_TO_SEC(1);
+
+        GVAR(RURF_MaxUnits) = round (32 * 1.3);
+
+        GVAR(Fortify_Resources) = 150;
     };
     
     case 4: {
-        MissionVoting = true;
+        GVAR(MissionVoting) = true;
     };
 };

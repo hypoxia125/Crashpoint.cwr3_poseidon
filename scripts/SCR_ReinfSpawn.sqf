@@ -1,4 +1,4 @@
-#include "macros.hpp"
+#include "script_component.hpp"
 
 private _heliClass = "cwr3_b_uh60";
 private _pilotClass = "cwr3_b_soldier_pilot";
@@ -6,29 +6,29 @@ private _crewClass = "cwr3_b_soldier_pilot";
 
 /*
 // Moved to params
-USRF_TimeUntilRF = 60 * 20;
+GVAR(USRF_TimeUntilRF) = 60 * 20;
 */
 
 waitUntil {
     sleep 1;
 
-    time >= USRF_TimeUntilRF
+    time >= GVAR(USRF_TimeUntilRF)
     ||
-    DEBUG
+    !isNil QGVAR(debug)
 };
 
-[missionNamespace, "US_Reinf", [], false] call BIS_fnc_callScriptedEventHandler;
-LOG_SYS("US_Reinf Event Handler Called");
+[missionNamespace, QGVAR(US_Reinf), [], false] call BIS_fnc_callScriptedEventHandler;
+LOG("US_Reinf Event Handler Called");
 
-[HQ, "Reinforcments ETA 30 Seconds!"] remoteExec ["sideChat", [0,-2] select isDedicated];
+[GVAR(HQ), "Reinforcments ETA 30 Seconds!"] remoteExec ["sideChat", [0,-2] select isDedicated];
 
 private _deadPlayers = allDead select {isPlayer _x};
 ["You may now respawn as a reinforcement!"] remoteExec ["hint", _deadPlayers];
 
 // create heli
-private _posStart = getMarkerPos "us_spawn_reinf_1" vectorAdd [0,0,100];
+private _posStart = getMarkerPos QGVAR(us_spawn_reinf_1) vectorAdd [0,0,100];
 private _heli = createVehicle [_heliClass, _posStart, [], 0, "FLY"];
-_heli setDir (getDir _heli + (_heli getRelDir (getPosATL heliCrash)));
+_heli setDir (getDir _heli + (_heli getRelDir (getPosATL GVAR(heliCrash))));
 _heli allowDamage false;
 
 // heli loadout
@@ -61,17 +61,17 @@ _heli spawn {
         ["ACE_bodyBag", 5],
         ["CUP_PipeBomb_M", 5]
     ];
-    _items insert [-1, loadoutHash get "cwr3_crate_basicweapons_us"];
-    _items insert [-1, loadoutHash get "cwr3_crate_basicweapons_us"];
-    _items insert [-1, loadoutHash get "cwr3_crate_grenades_us"];
-    _items insert [-1, loadoutHash get "cwr3_crate_grenades_us"];
+    _items insert [-1, GVAR(hmap_loadouts) get "cwr3_crate_basicweapons_us"];
+    _items insert [-1, GVAR(hmap_loadouts) get "cwr3_crate_basicweapons_us"];
+    _items insert [-1, GVAR(hmap_loadouts) get "cwr3_crate_grenades_us"];
+    _items insert [-1, GVAR(hmap_loadouts) get "cwr3_crate_grenades_us"];
 
     _items apply {
         _x params ["_item", "_count"];
         _heli addItemCargoGlobal [_item, _count];
     };
 };
-US_Heli = _heli;
+GVAR(US_Heli) = _heli;
 
 // create crew
 private _group = createGroup [PLAYER_SIDE, true];
@@ -88,13 +88,13 @@ for "_i" from 0 to (count allTurrets _heli - 1) do {
     _heli lockTurret [[_i], true];
 };
 
-LOG_SYS("Heli and Crew Created");
+LOG("Heli and Crew Created");
 
 //task
 execVM "tasks\exfil.sqf";
 
 // set wps
-private _pos = getMarkerPos "us_wp_reinf_1_1"; _pos set [2, 0];
+private _pos = getMarkerPos QGVAR(us_wp_reinf_1_1); _pos set [2, 0];
 private _helipad = createVehicle ["Land_HelipadEmpty_F", _pos, [], 0, "NONE"];
 // wp 1
 private _wp = _group addWaypoint [_helipad, -1];
@@ -112,7 +112,7 @@ _wp setWaypointStatements [
     },
     toString {
         if (isServer) then {
-            [missionNamespace, "Exfiltration", [], false] call BIS_fnc_callScriptedEventHandler;
+            [missionNamespace, QGVAR(Exfil), [], false] call BIS_fnc_callScriptedEventHandler;
         };
     }
 ];
@@ -128,7 +128,7 @@ _wp setWaypointStatements [
         getPosATL _heli select 2 <= 20
     };
 
-    LOG_SYS("Heli Landing - Smokes: Smokes Created");
+    LOG("Heli Landing - Smokes: Smokes Created");
 
     for "_i" from 0 to (360 - 30) step 30 do {
         private _smokePos = getPosATL _helipad getPos [20, _i];
@@ -146,6 +146,6 @@ _wp setWaypointCompletionRadius 0;
 
 // create respawn
 private _respawn = [PLAYER_SIDE, _heli, "Reinforcement Respawn"] call BIS_fnc_addRespawnPosition;
-missionNamespace setVariable ["reinf_respawn", _respawn];
+missionNamespace setVariable [QGVAR(reinf_respawn), _respawn];
 
-LOG_SYS("Respawn Created - Heli");
+LOG("Respawn Created - Heli");

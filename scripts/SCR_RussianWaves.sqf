@@ -1,4 +1,4 @@
-#include "macros.hpp"
+#include "script_component.hpp"
 
 private _heliClass = "cwr3_o_mi8_amt";
 private _pilotClass = "cwr3_o_soldier_pilot";
@@ -33,30 +33,30 @@ private _enemyUnits = [
     "cwr3_o_soldier_mg"
 ];
 
-/*
-// Move to params
-RURF_TimeUntilRF = 60 * 5;
-RURF_InitialTime = 60 * 5;
-RURF_PercentDecrease = 0.2;
-*/
-
 waitUntil {
     sleep 1;
 
-    time >= RURF_TimeUntilRF
+    time >= GVAR(RURF_TimeUntilRF)
     ||
-    DEBUG
+    !isNil QGVAR(debug)
 };
 
-private _waveTimer = RURF_InitialTime;
+private _waveTimer = GVAR(RURF_InitialTime);
+GVAR(RURF_ActiveUnits) = [];
+
 while {true} do {
-    LOG_SYS_1("Next Wave In %1 Seconds",_waveTimer);
+    LOG_1("Next Wave In %1 Seconds",_waveTimer);
+
+    waitUntil {
+        sleep 1;
+        (count GVAR(RURF_ActiveUnits)) < GVAR(RURF_MaxUnits)
+    };
 
     // create heli
-    private _marker = format ["ru_spawn_reinf_%1", ceil random 2];
+    private _marker = selectRandom [QGVAR(ru_spawn_reinf_1), QGVAR(ru_spawn_reinf_2)];
     private _posStart = getMarkerPos _marker vectorAdd [0,0,100];
     private _heli = createVehicle [_heliClass, _posStart, [], 30, "FLY"];
-    _heli setDir (getDir _heli + (_heli getRelDir (getPosATL heliCrash)));
+    _heli setDir (getDir _heli + (_heli getRelDir (getPosATL GVAR(heliCrash))));
 
     // create crew
     private _group = createGroup [ENEMY_SIDE, true];
@@ -73,10 +73,17 @@ while {true} do {
         _heli lockTurret [[_i], true];
     };
 
-    LOG_SYS("Heli and Crew Created");
+    LOG("Heli and Crew Created");
 
     // set wps
-    private _marker = format ["ru_wp_reinf_1_%1", ceil random 6];
+    private _marker = selectRandom [
+        QGVAR(ru_wp_reinf_1_1),
+        QGVAR(ru_wp_reinf_1_2),
+        QGVAR(ru_wp_reinf_1_3),
+        QGVAR(ru_wp_reinf_1_4),
+        QGVAR(ru_wp_reinf_1_5),
+        QGVAR(ru_wp_reinf_1_6)
+    ];
     private _pos = getMarkerPos _marker; _pos set [2, 0];
     private _helipad = createVehicle ["Land_HelipadEmpty_F", _pos, [], 0, "NONE"];
     // wp 1
@@ -94,7 +101,7 @@ while {true} do {
             getPosATL _heli select 2 <= 20
         };
 
-        LOG_SYS("Heli Landing - Smokes: Smokes Created");
+        LOG("Heli Landing - Smokes: Smokes Created");
 
         for "_i" from 0 to (360 - 30) step 30 do {
             private _smokePos = getPosATL _helipad getPos [20, _i];
@@ -121,23 +128,30 @@ while {true} do {
 
     // create enemy units
     private _playerCount = count ([true] call HYP_fnc_getPlayers);
-    private _numToSpawn = ceil linearConversion [1, playableSlotsNumber west, _playerCount, 8, count fullCrew [_heli, "CARGO", true], true];
+    private _numToSpawn = ceil linearConversion [1, playableSlotsNumber PLAYER_SIDE, _playerCount, 8, count fullCrew [_heli, "CARGO", true], true];
 
     private _group = createGroup [ENEMY_SIDE, true];
     for "_i" from 0 to (_numToSpawn - 1) do {
         private _class = _enemyUnits select _i;
         private _unit = _group createUnit [_class, [0,0,0], [], 0, "NONE"];
-        private _loadout = LoadoutHash get _class;
+        private _loadout = GVAR(hmap_loadouts) get _class;
         _unit setUnitLoadout _loadout;
         _unit moveInCargo _heli;
+        GVAR(RURF_ActiveUnits) pushBackUnique _unit;
+
+        _unit addEventHandler ["Killed", {
+            params ["_unit", "_killer", "_instigator", "_useEffects"];
+
+            GVAR(RURF_ActiveUnits) deleteAt (GVAR(RURF_ActiveUnits) find _unit);
+        }];
     };
 
     // wp
-    private _wp = _group addWaypoint [getPosATL HeliCrash, 10];
+    private _wp = _group addWaypoint [getPosATL GVAR(HeliCrash), 10];
     _wp setWaypointType "SAD";
 
     sleep (_waveTimer max 60);
 
     // change wave time
-    _waveTimer = (_waveTimer - (_waveTimer * RURF_PercentDecrease) max RURF_MinimumWaveTime);
+    _waveTimer = (_waveTimer - (_waveTimer * GVAR(RURF_PercentDecrease) max GVAR(RURF_MinimumWaveTime)));
 };
